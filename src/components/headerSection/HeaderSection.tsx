@@ -10,9 +10,10 @@ export default function HeaderSection() {
     { country: "Brasil", language: "Português", acronym: "br" },
     { country: "United States", language: "English", acronym: "us" },
     { country: "Spain", language: "Spanish", acronym: "es" },
-  ]
-  const [selectedLanguage, setSelectedLanguage] = useState(countriesLanguages[0]);
-
+  ];
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    countriesLanguages[0]
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,20 +56,22 @@ export default function HeaderSection() {
               <span className="text-[#FAFF00]">R</span>odrigues
             </span>
           </div>
-        <ul className="flex items-center justify-center gap-8">
-          {headerOptions.map((option, index) => (
-            <li
-              key={index}
-              className={`cursor-pointer transition-all duration-300 ${
-                option === "Início" ? "text-[#FAFF00]" : "hover:text-[#FAFF00]"
-              }`}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center justify-center gap-3">
-        <Image
+          <ul className="flex items-center justify-center gap-8">
+            {headerOptions.map((option, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer transition-all duration-300 ${
+                  option === "Início"
+                    ? "text-[#FAFF00]"
+                    : "hover:text-[#FAFF00]"
+                }`}
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center justify-center gap-3">
+            <Image
               alt="Bandeira Nacional"
               src={`/images/headerSection/flags/${selectedLanguage.acronym}.svg`}
               width={0}
@@ -77,18 +80,15 @@ export default function HeaderSection() {
               className="w-[23px] h-auto rounded-[4px]"
             />
             <div role="separator" className="w-[1px] h-[17px] bg-white" />
-        <Image
+            <Image
               alt="Telefone"
               src={`/images/headerSection/phone.svg`}
               width={0}
               height={0}
               sizes="100%"
               className="w-[18px] h-auto rounded-[4px]"
-            />  <span
-            className={`cursor-pointer text-white`}
-          >
-            (31) 99164-7507
-          </span>
+            />{" "}
+            <span className={`cursor-pointer text-white`}>(31) 99164-7507</span>
           </div>
         </div>
       </header>
