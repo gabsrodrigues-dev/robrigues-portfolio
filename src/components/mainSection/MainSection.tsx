@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function MainSection() {
   return (
     <div className="flex w-full h-full min-h-[40vh] justify-center items-center relative">
-      <div className="flex flex-col w-full h-full justify-center items-center z-[1] text-white">
+      <div className="flex flex-col w-full h-full justify-center items-center z-[1]">
         <span className="text-sm uppercase tracking-[0.64rem]">
           FRONT-END DEVELOPER
         </span>
@@ -17,7 +17,7 @@ export default function MainSection() {
         <Image alt="Linhas primeira dobra" src="/images/mainSection/mainSectionLines.svg" width={0} height={0} sizes="100%" className="w-[600px] h-auto"/>
       </div>
       <div className="absolute bottom-0 right-[5%]">
-        <Image alt="Linhas primeira dobra" src="/images/mainSection/mainSectionCode.svg" width={0} height={0} sizes="100%" className="w-[300px] h-auto"/>
+        <Image alt="Ícone de código" src="/images/mainSection/mainSectionCode.svg" width={0} height={0} sizes="100%" className="w-[300px] h-auto"/>
       </div>
     </div>
   );

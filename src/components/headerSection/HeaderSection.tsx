@@ -38,7 +38,7 @@ export default function HeaderSection() {
     <>
       <header
         id="mainHeader"
-        className={`flex z-10 top-0 left-0 py-3 w-full items-center justify-center transition-all duration-300 text-white ${
+        className={`flex z-10 top-0 left-0 py-3 w-full items-center justify-center transition-all duration-300 ${
           fixedHeader ? "fixed slide-from-top" : ""
         }`}
       >
@@ -88,7 +88,7 @@ export default function HeaderSection() {
               sizes="100%"
               className="w-[18px] h-auto rounded-[4px]"
             />{" "}
-            <span className={`cursor-pointer text-white`}>(31) 99164-7507</span>
+            <span className={`cursor-pointer`}>(31) 99164-7507</span>
           </div>
         </div>
       </header>

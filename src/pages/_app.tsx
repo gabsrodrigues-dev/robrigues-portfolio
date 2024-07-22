@@ -10,7 +10,7 @@ const alatsi = Alatsi({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main
-      className={`max-w-screen min-h-screen overflow-x-hidden bg-[#070514] ${alatsi.className}`}
+      className={`max-w-screen min-h-screen overflow-x-hidden bg-[#070514] text-white ${alatsi.className}`}
     >
       <Component {...pageProps} />
     </main>
