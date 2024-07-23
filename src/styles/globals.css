@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background: #070514;
+}
+
 .slide-from-top {
   animation: slideFromTop 0.2s ease-out;
 }

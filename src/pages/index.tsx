@@ -4,9 +4,9 @@ import AboutMeSection from "@/components/aboutMeSection/AboutMeSection";
 
 export default function Home() {
   return (
-    <main className="flex flex-col w-full items-center justify-center gap-12 pb-12">
+    <main className="flex flex-col w-full items-center justify-center gap-12 pb-12 px-[5vw]">
       <HeaderSection />
-      <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px] max-md:px-[5vw]">
+      <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px]">
         <MainSection />
         <AboutMeSection />
       </main>

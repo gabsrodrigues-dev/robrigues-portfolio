@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { RiArrowLeftLine, RiMenu3Fill } from "react-icons/ri";
 
 export default function HeaderSection() {
   const [fixedHeader, setFixedHeader] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [actualSection, setActualSection] = useState("Início");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const headerOptions = ["Início", "Sobre", "Resumo", "Contato"];
 
@@ -68,10 +70,14 @@ export default function HeaderSection() {
   }, []);
 
   const handleScrollToSection = (id: string) => {
-    setActualSection(id)
+    setActualSection(id);
     const mentionedSection = document.getElementById(id);
     if (mentionedSection)
       mentionedSection.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   return (
@@ -79,10 +85,10 @@ export default function HeaderSection() {
       <header
         id="mainHeader"
         className={`flex z-10 top-0 left-0 py-3 w-full items-center justify-center transition-all duration-300 ${
-          fixedHeader ? "fixed slide-from-top" : ""
+          fixedHeader ? "fixed slide-from-top px-[5vw] bg-[#070514]" : ""
         }`}
       >
-        <div className="flex justify-between w-full max-w-[1170px]">
+        <div className="flex justify-between items-center w-full max-w-[1170px]">
           <div className="flex items-center justify-center gap-3">
             <Image
               alt="Logo Page"
@@ -96,7 +102,7 @@ export default function HeaderSection() {
               <span className="text-[#FAFF00]">R</span>odrigues
             </span>
           </div>
-          <ul className="flex items-center justify-center gap-8">
+          <ul className="flex items-center justify-center gap-8 max-md:hidden">
             {headerOptions.map((option, index) => (
               <li
                 key={index}
@@ -111,59 +117,60 @@ export default function HeaderSection() {
               </li>
             ))}
           </ul>
-          <div className="flex items-center justify-end gap-3 relative min-w-[220px]">
+          <div className="flex items-center justify-end gap-3 relative min-w-[220px] max-md:hidden">
             <div className="relative">
-            <Image
-              alt="Bandeira Nacional"
-              src={`/images/headerSection/flags/${selectedLanguage.acronym}.svg`}
-              width={23}
-              height={17}
-              sizes="100%"
-              className="w-[23px] h-auto rounded cursor-pointer"
-              onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-            />
-            <div
-              className={`absolute -top-3 -left-2 w-[150px] bg-white text-black rounded overflow-hidden shadow transition-all duration-300 ${
-                languageMenuOpen
-                  ? "opacity-100 visible transform scale-y-100"
-                  : "opacity-0 invisible transform scale-y-0"
-              } origin-top`}
-            >
+              <Image
+                alt="Bandeira Nacional"
+                src={`/images/headerSection/flags/${selectedLanguage.acronym}.svg`}
+                width={23}
+                height={17}
+                sizes="100%"
+                className="w-[23px] h-auto rounded cursor-pointer"
+                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+              />
               <div
-                className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2"
-                onClick={() => setLanguageMenuOpen(false)}
+                className={`absolute -top-3 -left-2 w-[150px] bg-white text-black rounded overflow-hidden shadow transition-all duration-300 ${
+                  languageMenuOpen
+                    ? "opacity-100 visible transform scale-y-100"
+                    : "opacity-0 invisible transform scale-y-0"
+                } origin-top`}
               >
-                <Image
-                  alt={`${selectedLanguage.language} flag`}
-                  src={`/images/headerSection/flags/${selectedLanguage.acronym}.svg`}
-                  width={23}
-                  height={17}
-                  className="rounded"
-                />
-                {selectedLanguage.language}
+                <div
+                  className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2"
+                  onClick={() => setLanguageMenuOpen(false)}
+                >
+                  <Image
+                    alt={`${selectedLanguage.language} flag`}
+                    src={`/images/headerSection/flags/${selectedLanguage.acronym}.svg`}
+                    width={23}
+                    height={17}
+                    className="rounded"
+                  />
+                  {selectedLanguage.language}
+                </div>
+                {countriesLanguages
+                  .filter((lang) => lang.acronym !== selectedLanguage.acronym)
+                  .map((lang) => (
+                    <div
+                      key={lang.acronym}
+                      onClick={() => {
+                        setSelectedLanguage(lang);
+                        setLanguageMenuOpen(false);
+                      }}
+                      className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2"
+                    >
+                      <Image
+                        alt={`${lang.language} flag`}
+                        src={`/images/headerSection/flags/${lang.acronym}.svg`}
+                        width={23}
+                        height={17}
+                        className="rounded"
+                      />
+                      {lang.language}
+                    </div>
+                  ))}
               </div>
-              {countriesLanguages
-                .filter((lang) => lang.acronym !== selectedLanguage.acronym)
-                .map((lang) => (
-                  <div
-                    key={lang.acronym}
-                    onClick={() => {
-                      setSelectedLanguage(lang);
-                      setLanguageMenuOpen(false);
-                    }}
-                    className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2"
-                  >
-                    <Image
-                      alt={`${lang.language} flag`}
-                      src={`/images/headerSection/flags/${lang.acronym}.svg`}
-                      width={23}
-                      height={17}
-                      className="rounded"
-                    />
-                    {lang.language}
-                  </div>
-                ))}
-            </div></div>
+            </div>
             <div role="separator" className="w-[1px] h-[17px] bg-white" />
             <Image
               alt="Telefone"
@@ -188,9 +195,23 @@ export default function HeaderSection() {
                     : "tel:+5531991647507")
               }
             >
-              <span className={`transition-all duration-300 ${selectedLanguage.acronym === "br" ? "-ml-[30px] opacity-0" : "" }`}>+55{' '}</span>
+              <span
+                className={`transition-all duration-300 ${
+                  selectedLanguage.acronym === "br"
+                    ? "-ml-[30px] opacity-0"
+                    : ""
+                }`}
+              >
+                +55{" "}
+              </span>
               (31) 99164-7507
             </span>
+          </div>
+
+          <div className="relative md:hidden">
+            <div className="w-full h-full" onClick={handleMobileMenu}>
+              <RiMenu3Fill size={23} color="#fff" />
+            </div>
           </div>
         </div>
       </header>
@@ -200,6 +221,44 @@ export default function HeaderSection() {
           display: fixedHeader ? "block" : "none",
         }}
       />
+
+      <div
+        className={`fixed top-0 right-0 min-w-[40vw] z-[11] h-full bg-[#070514] p-[5vw] transition-all duration-300 ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <ul className="flex flex-col gap-4">
+          <div className="relative md:hidden">
+            <div className="flex justify-start w-full h-full" onClick={handleMobileMenu}>
+              <RiArrowLeftLine size={23} color="#fff" />
+            </div>
+          </div>
+          {headerOptions.map((option, index) => (
+            <li
+              key={index}
+              onClick={() => {
+                handleScrollToSection(option);
+                handleMobileMenu();
+              }}
+              className={`w-full text-lg text-right cursor-pointer transition-all duration-300 ${
+                option === actualSection
+                  ? "text-[#FAFF00]"
+                  : "hover:text-[#FAFF00]"
+              }`}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div
+        onClick={handleMobileMenu}
+        className={`fixed top-0 left-0 w-full h-full transition-all duration-300 z-[10] ${
+          mobileMenuOpen ? "bg-black/50" : "pointer-events-none"
+        }`}
+      />
+
       <style jsx>{`
         .transition-opacity {
           transition: opacity 0.3s ease-out, transform 0.3s ease-out;

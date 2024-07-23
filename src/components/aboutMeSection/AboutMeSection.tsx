@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AboutMeSection() {
   return (
-    <section className="flex w-full justify-between items-center max-md:flex-col">
+    <section className="flex w-full justify-between items-center max-md:flex-col gap-12">
       <div className="max-md:pb-6 max-md:w-full">
       <div className="w-full h-full md:w-fit md:h-[364px]">
         <div className="relative bg-[#D9D9D9] w-full h-full max-md:p-6 md:w-[340px] md:h-[340px]">
@@ -35,8 +35,8 @@ export default function AboutMeSection() {
             />
           </div>
         </div>
-        <p className="text-lg max-md:text-justify">Eu sou um desenvolvedor independente, sempre em busca de conhecimento. Já possuo experiência por mais de um ano como desenvolvedor front-end, atuando em construção de sistemas front-end desde o início, como em reconstrução de sistemas em linguagens mais otimizadas.</p>
-        <p className="text-lg max-md:text-justify">Nestes projetos – principalmente nos de reconstrução –, sempre viso o desempenho e performance do website, visto que são projetos que recebem centenas de milhares de acessos todos os meses, requirindo o SEO de máxima excelência.</p>
+        <p className="text-lg max-lg:text-justify">Eu sou um desenvolvedor independente, sempre em busca de conhecimento. Já possuo experiência por mais de um ano como desenvolvedor front-end, atuando em construção de sistemas front-end desde o início, como em reconstrução de sistemas em linguagens mais otimizadas.</p>
+        <p className="text-lg max-lg:text-justify">Nestes projetos – principalmente nos de reconstrução –, sempre viso o desempenho e performance do website, visto que são projetos que recebem centenas de milhares de acessos todos os meses, requirindo o SEO de máxima excelência.</p>
       </div>
     </section>
   );
