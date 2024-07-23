@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full items-center justify-center gap-12 pb-12">
       <HeaderSection />
-      <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px]">
+      <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px] max-md:px-[5vw]">
         <MainSection />
         <AboutMeSection />
       </main>
