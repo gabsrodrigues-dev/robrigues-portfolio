@@ -1,16 +1,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { RiArrowLeftLine, RiMenu3Fill } from "react-icons/ri";
+import MobileMenu from "./mobileMenu/MobileMenu";
 
 export default function HeaderSection() {
   const [fixedHeader, setFixedHeader] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [actualSection, setActualSection] = useState("Início");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const headerOptions = ["Início", "Sobre", "Resumo", "Contato"];
-
   const countriesLanguages = [
     { country: "Brasil", language: "Português", acronym: "br" },
     { country: "United States", language: "English", acronym: "us" },
@@ -76,16 +74,12 @@ export default function HeaderSection() {
       mentionedSection.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
   return (
     <>
       <header
         id="mainHeader"
-        className={`flex z-10 top-0 left-0 py-3 w-full items-center justify-center transition-all duration-300 ${
-          fixedHeader ? "fixed slide-from-top px-[5vw] bg-[#070514]" : ""
+        className={`flex z-10 top-0 left-0 py-3 w-full items-center justify-center px-[5vw] transition-all duration-300 ${
+          fixedHeader ? "fixed slide-from-top bg-[#070514]" : ""
         }`}
       >
         <div className="flex justify-between items-center w-full max-w-[1170px]">
@@ -207,12 +201,6 @@ export default function HeaderSection() {
               (31) 99164-7507
             </span>
           </div>
-
-          <div className="relative md:hidden">
-            <div className="w-full h-full" onClick={handleMobileMenu}>
-              <RiMenu3Fill size={23} color="#fff" />
-            </div>
-          </div>
         </div>
       </header>
       <div
@@ -221,73 +209,7 @@ export default function HeaderSection() {
           display: fixedHeader ? "block" : "none",
         }}
       />
-
-      <div
-        className={`fixed top-0 right-0 min-w-[40vw] z-[11] h-full bg-[#070514] p-[5vw] transition-all duration-300 ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <ul className="flex flex-col gap-4">
-          <div className="relative md:hidden">
-            <div className="flex justify-start w-full h-full" onClick={handleMobileMenu}>
-              <RiArrowLeftLine size={23} color="#fff" />
-            </div>
-          </div>
-          {headerOptions.map((option, index) => (
-            <li
-              key={index}
-              onClick={() => {
-                handleScrollToSection(option);
-                handleMobileMenu();
-              }}
-              className={`w-full text-lg text-right cursor-pointer transition-all duration-300 ${
-                option === actualSection
-                  ? "text-[#FAFF00]"
-                  : "hover:text-[#FAFF00]"
-              }`}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div
-        onClick={handleMobileMenu}
-        className={`fixed top-0 left-0 w-full h-full transition-all duration-300 z-[10] ${
-          mobileMenuOpen ? "bg-black/50" : "pointer-events-none"
-        }`}
-      />
-
-      <style jsx>{`
-        .transition-opacity {
-          transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        }
-
-        .opacity-0 {
-          opacity: 0;
-        }
-
-        .opacity-100 {
-          opacity: 1;
-        }
-
-        .invisible {
-          visibility: hidden;
-        }
-
-        .visible {
-          visibility: visible;
-        }
-
-        .scale-y-0 {
-          transform: scaleY(0);
-        }
-
-        .scale-y-100 {
-          transform: scaleY(1);
-        }
-      `}</style>
+        <MobileMenu />
     </>
   );
 }
