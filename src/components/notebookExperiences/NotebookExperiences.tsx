@@ -1,98 +1,68 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const experiences = [
   [
-    {
-      title: "titulo 1",
-      description: "descrição 1",
-    },
-    {
-      title: "titulo 2",
-      description: "descrição 2",
-    },
-    {
-      title: "titulo 3",
-      description: "descrição 3",
-    },
+    { title: "titulo 1", description: "descrição 1" },
+    { title: "titulo 2", description: "descrição 2" },
+    { title: "titulo 3", description: "descrição 3" },
   ],
   [
-    {
-      title: "titulo 4",
-      description: "descrição 4",
-    },
-    {
-      title: "titulo 5",
-      description: "descrição 5",
-    },
-    {
-      title: "titulo 6",
-      description: "descrição 6",
-    },
+    { title: "titulo 4", description: "descrição 4" },
+    { title: "titulo 5", description: "descrição 5" },
+    { title: "titulo 6", description: "descrição 6" },
   ],
   [
-    {
-      title: "titulo 7",
-      description: "descrição 7",
-    },
-    {
-      title: "titulo 8",
-      description: "descrição 8",
-    },
-    {
-      title: "titulo 9",
-      description: "descrição 9",
-    },
+    { title: "titulo 7", description: "descrição 7" },
+    { title: "titulo 8", description: "descrição 8" },
+    { title: "titulo 9", description: "descrição 9" },
   ],
 ];
 
 export default function NotebookExperiences() {
   const [currentExperience, setCurrentExperience] = useState(0);
-  const [displayExperience, setDisplayExperience] = useState(experiences[0]);
   const [isFixedSection, setFixedSection] = useState(false);
   const [isAfterScrolled, setAfterScrolled] = useState(false);
   const [contentChanging, setContentChanging] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const thisSection = document.getElementById("ResumeVerifier");
-      if (thisSection === null) return;
-      const thisSectionTopPosition = thisSection.offsetTop;
-      const scrollPosition = window.scrollY;
-      const screenHeight = window.innerHeight;
+  const displayExperience = useMemo(() => experiences[currentExperience], [currentExperience]);
 
-      setAfterScrolled(
-        scrollPosition > thisSectionTopPosition * (experiences.length + 1)
-      );
-      if (
-        scrollPosition >= thisSectionTopPosition &&
-        scrollPosition <
-          thisSectionTopPosition + experiences.length * screenHeight
-      ) {
-        setFixedSection(true);
-        const newIndex = Math.floor((scrollPosition - thisSectionTopPosition) / screenHeight);
-        if (newIndex !== currentExperience) {
-          setCurrentExperience(newIndex);
-          setContentChanging(true);
-        }
-    } else {
-         if(scrollPosition <= thisSectionTopPosition) setCurrentExperience(0);
-        setFixedSection(false);
+  const handleScroll = useCallback(() => {
+    const thisSection = document.getElementById("ResumeVerifier");
+    if (!thisSection) return;
+
+    const thisSectionTopPosition = thisSection.offsetTop;
+    const scrollPosition = window.scrollY;
+    const screenHeight = window.innerHeight;
+
+    setAfterScrolled(scrollPosition > thisSectionTopPosition * (experiences.length + 1));
+
+    if (
+      scrollPosition >= thisSectionTopPosition &&
+      scrollPosition < thisSectionTopPosition + experiences.length * screenHeight
+    ) {
+      setFixedSection(true);
+      const newIndex = Math.floor((scrollPosition - thisSectionTopPosition) / screenHeight);
+      if (newIndex !== currentExperience) {
+        setCurrentExperience(newIndex);
+        setContentChanging(true);
       }
-    };
+    } else {
+      if (scrollPosition <= thisSectionTopPosition) setCurrentExperience(0);
+      setFixedSection(false);
+    }
+  }, [currentExperience]);
 
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [currentExperience]);
+  }, [handleScroll]);
 
   const handleAnimationComplete = () => {
-    if (contentChanging) {
-      setDisplayExperience(experiences[currentExperience]);
-      setContentChanging(false);
-    }
+    setContentChanging(false);
   };
 
   return (
@@ -109,14 +79,9 @@ export default function NotebookExperiences() {
         id="ResumeVerifier"
       />
       <div
-        className={`w-full h-screen flex justify-center ${
-          isFixedSection ? "fixed top-0 left-0 w-full" : ""
-        }`}
+        className={`w-full h-screen flex justify-center ${isFixedSection ? "fixed top-0 left-0 w-full will-change-transform transition-transform duration-200 ease-in-out" : ""}`}
       >
-        <div
-          id="Resumo"
-          className="flex items-center justify-between w-full max-w-[1170px]"
-        >
+        <div id="Resumo" className="flex items-center justify-between w-full max-w-[1170px]">
           <div className="min-w-[700px] relative">
             <div className="bg-gradient-to-r -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
             <Image
