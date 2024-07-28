@@ -2,18 +2,19 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import MobileMenu from "./mobileMenu/MobileMenu";
 
+const headerOptions = ["Início", "Sobre", "Resumo", "Contato"];
+const countriesLanguages = [
+  { country: "Brasil", language: "Português", acronym: "br" },
+  { country: "United States", language: "English", acronym: "us" },
+  { country: "Spain", language: "Spanish", acronym: "es" },
+];
+
 export default function HeaderSection() {
   const [fixedHeader, setFixedHeader] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [actualSection, setActualSection] = useState("Início");
 
-  const headerOptions = ["Início", "Sobre", "Resumo", "Contato"];
-  const countriesLanguages = [
-    { country: "Brasil", language: "Português", acronym: "br" },
-    { country: "United States", language: "English", acronym: "us" },
-    { country: "Spain", language: "Spanish", acronym: "es" },
-  ];
 
   const getDefaultLanguage = () => {
     if (typeof navigator === "undefined") return countriesLanguages[0];

@@ -1,6 +1,7 @@
 import MainSection from "@/components/mainSection/MainSection";
 import HeaderSection from "@/components/headerSection/HeaderSection";
 import AboutMeSection from "@/components/aboutMeSection/AboutMeSection";
+import NotebookExperiences from "@/components/notebookExperiences/NotebookExperiences";
 
 export default function Home() {
   return (
@@ -9,6 +10,8 @@ export default function Home() {
       <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px] max-md:px-[5vw]">
         <MainSection />
         <AboutMeSection />
+        <NotebookExperiences />
+        <div className="h-[500vh] w-full bg-gradient-to-b from-black to-white"/>
       </main>
     </main>
   )
