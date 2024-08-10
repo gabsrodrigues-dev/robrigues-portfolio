@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import StickyBox from "react-sticky-box";
+import { useState, useEffect } from "react";
 
 const experiences = [
   [
@@ -22,98 +22,82 @@ const experiences = [
 
 export default function NotebookExperiences() {
   const [currentExperience, setCurrentExperience] = useState(0);
-  const [isFixedSection, setFixedSection] = useState(false);
-  const [isAfterScrolled, setAfterScrolled] = useState(false);
-  const [contentChanging, setContentChanging] = useState(false);
+  const [lastExperience, setLastExperience] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animateStep, setAnimateStep] = useState(0);
 
-  const displayExperience = useMemo(() => experiences[currentExperience], [currentExperience]);
-
-  const handleScroll = useCallback(() => {
-    const thisSection = document.getElementById("ResumeVerifier");
-    if (!thisSection) return;
-
-    const thisSectionTopPosition = thisSection.offsetTop;
-    const scrollPosition = window.scrollY;
-    const screenHeight = window.innerHeight;
-
-    setAfterScrolled(scrollPosition > thisSectionTopPosition * (experiences.length + 1));
-
-    if (
-      scrollPosition >= thisSectionTopPosition &&
-      scrollPosition < thisSectionTopPosition + experiences.length * screenHeight
-    ) {
-      setFixedSection(true);
-      const newIndex = Math.floor((scrollPosition - thisSectionTopPosition) / screenHeight);
-      if (newIndex !== currentExperience) {
-        setCurrentExperience(newIndex);
-        setContentChanging(true);
-      }
-    } else {
-      if (scrollPosition <= thisSectionTopPosition) setCurrentExperience(0);
-      setFixedSection(false);
+  const handleScroll = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const newExperience = Math.min(3, Math.floor(scrollTop / window.innerHeight));
+    const calculatedExperience = newExperience <= 1 ? 0 : newExperience - 1;
+    
+    if (calculatedExperience !== currentExperience) {
+      setIsAnimating(true);
+      setLastExperience(currentExperience);
+      setCurrentExperience(calculatedExperience);
     }
-  }, [currentExperience]);
+  };
+
+  useEffect(() => {
+    if (isAnimating) {
+      setAnimateStep(1);
+
+      const firstTimeout = setTimeout(() => {
+        setAnimateStep(2);
+
+        const secondTimeout = setTimeout(() => {
+          setAnimateStep(0);
+          setIsAnimating(false);
+        }, 300);
+
+        return () => clearTimeout(secondTimeout);
+      }, 300);
+
+      return () => clearTimeout(firstTimeout);
+    }
+  }, [isAnimating]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [handleScroll]);
-
-  const handleAnimationComplete = () => {
-    setContentChanging(false);
-  };
+  }, [currentExperience]);
 
   return (
-    <section className="w-full">
-      <div
-        style={{
-          height: isFixedSection
-            ? `${(experiences.length + 1) * 100}vh`
-            : isAfterScrolled
-            ? "300vh"
-            : "0",
-          width: isFixedSection || isAfterScrolled ? "100%" : "0",
-        }}
-        id="ResumeVerifier"
-      />
-      <div
-        className={`w-full h-screen flex justify-center ${isFixedSection ? "fixed top-0 left-0 w-full will-change-transform transition-transform duration-200 ease-in-out" : ""}`}
-      >
-        <div id="Resumo" className="flex items-center justify-between w-full max-w-[1170px]">
-          <div className="min-w-[700px] relative">
-            <div className="bg-gradient-to-r -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
-            <Image
-              src="/images/notebookExperiences/notebookExperiencesNotebook.webp"
-              alt="Notebook"
-              width={700}
-              height={500}
-              className="-ml-[200px]"
-            />
+    <section className="w-full relative" style={{ height: "400vh" }}>
+      <div className="absolute inset-0">
+        <StickyBox offsetTop={0} offsetBottom={0} className="h-screen flex justify-center">
+          <div
+            id="Resumo"
+            className="flex items-center justify-between w-full max-w-[1170px]"
+          >
+            <div className="min-w-[700px] relative">
+              <div className="bg-gradient-to-r -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
+              <Image
+                src="/images/notebookExperiences/notebookExperiencesNotebook.webp"
+                alt="Notebook"
+                width={700}
+                height={500}
+                className="-ml-[200px]"
+              />
+            </div>
+            <div className="flex flex-col h-full max-h-[290px] justify-center">
+              {animateStep !== 2 ? experiences[animateStep === 0 ? currentExperience : lastExperience].map((content, index) => (
+                <div key={index} className="flex flex-col items-end">
+                  <h1 className={`transition-all duration-300 text-3xl font-bold ${animateStep === 1 ? 'opacity-0 translate-y-[100%]' : 'opacity-100'}`}>{content.title}</h1>
+                  <p className={`transition-all duration-300 text-lg ${animateStep === 1 ? 'opacity-0 translate-y-[100%]' : 'opacity-100'}`}>{content.description}</p>
+                </div>
+              )) : experiences[currentExperience].map((content, index) => (
+                <div key={index} className="flex flex-col items-end">
+                  <h1 className={`transition-all duration-300 text-3xl font-bold opacity-100`}>{content.title}</h1>
+                  <p className={`transition-all duration-300 text-lg opacity-100`}>{content.description}</p>
+                </div>
+              ))
+              }
+            </div>
           </div>
-          <div className="flex flex-col h-full max-h-[290px] justify-center">
-            <AnimatePresence onExitComplete={handleAnimationComplete}>
-              {!contentChanging && (
-                <motion.div
-                  className="flex flex-col h-full justify-between items-end"
-                  key={currentExperience}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {displayExperience.map((content, index) => (
-                    <div key={index} className="flex flex-col items-end">
-                      <h1 className="text-3xl font-bold">{content.title}</h1>
-                      <p className="text-lg">{content.description}</p>
-                    </div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
+        </StickyBox>
       </div>
     </section>
   );
