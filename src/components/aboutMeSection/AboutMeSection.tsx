@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AboutMeSection() {
   return (
-    <section className="flex w-full justify-between items-center max-md:flex-col gap-12">
+    <section id="aboutMeSection" className="flex w-full justify-between items-center max-md:flex-col gap-12">
       <div className="max-md:pb-6 max-md:w-full">
         <div className="w-full h-full md:w-fit md:h-[364px]">
           <div className="relative bg-[#D9D9D9] w-full h-full max-md:p-6 md:w-[340px] md:h-[340px]">
