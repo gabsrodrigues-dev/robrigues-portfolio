@@ -2,11 +2,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import MobileMenu from "./mobileMenu/MobileMenu";
 
-const headerOptions = ["Início", "Sobre", "Resumo", "Contato"];
+const headerOptions = [
+  { name: "Início", offset: 128, id: "mainSection" },
+  { name: "Sobre", offset: 130, id: "aboutMeSection" },
+  { name: "Resumo", offset: 0, id: "resumeSection" },
+  { name: "Contato", offset: 0, id: "contactSection" }
+];
+
 const countriesLanguages = [
   { country: "Brasil", language: "Português", acronym: "br" },
   { country: "United States", language: "English", acronym: "us" },
-  { country: "Spain", language: "Spanish", acronym: "es" },
+  { country: "Spain", language: "Spanish", acronym: "es" }
 ];
 
 export default function HeaderSection() {
@@ -14,7 +20,6 @@ export default function HeaderSection() {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [actualSection, setActualSection] = useState("Início");
-
 
   const getDefaultLanguage = () => {
     if (typeof navigator === "undefined") return countriesLanguages[0];
@@ -68,11 +73,14 @@ export default function HeaderSection() {
     }
   }, []);
 
-  const handleScrollToSection = (id: string) => {
+  const handleScrollToSection = (id: string, offset: number) => {
     setActualSection(id);
     const mentionedSection = document.getElementById(id);
-    if (mentionedSection)
-      mentionedSection.scrollIntoView({ behavior: "smooth" });
+    if (mentionedSection) {
+      const sectionTop =
+        mentionedSection.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: sectionTop - offset, behavior: "smooth" });
+    }
   };
 
   return (
@@ -81,8 +89,7 @@ export default function HeaderSection() {
         id="mainHeader"
         className={`flex z-10 top-0 left-0 py-3 w-full items-center justify-center px-[5vw] transition-all duration-300 ${
           fixedHeader ? "fixed slide-from-top bg-[#070514]" : ""
-        }`}
-      >
+        }`}>
         <div className="flex justify-between items-center w-full max-w-[1170px]">
           <div className="flex items-center justify-center gap-3">
             <Image
@@ -101,14 +108,13 @@ export default function HeaderSection() {
             {headerOptions.map((option, index) => (
               <li
                 key={index}
-                onClick={() => handleScrollToSection(option)}
+                onClick={() => handleScrollToSection(option.id, option.offset)}
                 className={`cursor-pointer transition-all duration-300 ${
-                  option === actualSection
+                  option.id === actualSection
                     ? "text-[#FAFF00]"
                     : "hover:text-[#FAFF00]"
-                }`}
-              >
-                {option}
+                }`}>
+                {option.name}
               </li>
             ))}
           </ul>
@@ -128,12 +134,10 @@ export default function HeaderSection() {
                   languageMenuOpen
                     ? "opacity-100 visible transform scale-y-100"
                     : "opacity-0 invisible transform scale-y-0"
-                } origin-top`}
-              >
+                } origin-top`}>
                 <div
                   className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2"
-                  onClick={() => setLanguageMenuOpen(false)}
-                >
+                  onClick={() => setLanguageMenuOpen(false)}>
                   <Image
                     alt={`${selectedLanguage.language} flag`}
                     src={`/images/headerSection/flags/${selectedLanguage.acronym}.svg`}
@@ -152,8 +156,7 @@ export default function HeaderSection() {
                         setSelectedLanguage(lang);
                         setLanguageMenuOpen(false);
                       }}
-                      className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2"
-                    >
+                      className="cursor-pointer p-2 hover:bg-gray-200 flex items-center gap-2">
                       <Image
                         alt={`${lang.language} flag`}
                         src={`/images/headerSection/flags/${lang.acronym}.svg`}
@@ -188,15 +191,13 @@ export default function HeaderSection() {
                   selectedLanguage.acronym === "br"
                     ? "tel:31991647507"
                     : "tel:+5531991647507")
-              }
-            >
+              }>
               <span
                 className={`transition-all duration-300 ${
                   selectedLanguage.acronym === "br"
                     ? "-ml-[30px] opacity-0"
                     : ""
-                }`}
-              >
+                }`}>
                 +55{" "}
               </span>
               (31) 99164-7507
@@ -207,10 +208,10 @@ export default function HeaderSection() {
       <div
         style={{
           height: `${headerHeight}px`,
-          display: fixedHeader ? "block" : "none",
+          display: fixedHeader ? "block" : "none"
         }}
       />
-        <MobileMenu />
+      <MobileMenu />
     </>
   );
 }
