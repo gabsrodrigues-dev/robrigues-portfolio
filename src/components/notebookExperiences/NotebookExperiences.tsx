@@ -29,10 +29,7 @@ export default function NotebookExperiences() {
   const handleScroll = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const stepHeight = window.innerHeight; //1.5
-    const newExperience = Math.min(
-      3,
-      Math.floor(scrollTop / stepHeight)
-    );
+    const newExperience = Math.min(3, Math.floor(scrollTop / stepHeight));
     const calculatedExperience = newExperience <= 1 ? 0 : newExperience - 1;
 
     if (calculatedExperience !== currentExperience) {
@@ -42,15 +39,21 @@ export default function NotebookExperiences() {
     }
 
     const percentage = ((scrollTop % stepHeight) / stepHeight) * 100;
-    
-    const resumeScrollVerifier = document.getElementById("resumeScrollVerifier");
+
+    const resumeScrollVerifier = document.getElementById(
+      "resumeScrollVerifier"
+    );
     if (resumeScrollVerifier) {
       const windowHeight = window.innerHeight;
       const resumeScrollTop = resumeScrollVerifier.getBoundingClientRect().top;
-      const resumeScrollBottom = resumeScrollVerifier.getBoundingClientRect().bottom;
-      console.log(resumeScrollBottom)
-      if (resumeScrollTop < 0 && resumeScrollBottom-windowHeight > 0) { //1.5
-        console.log(`Porcentagem até o próximo step: ${percentage.toFixed(2)}%`);
+      const resumeScrollBottom =
+        resumeScrollVerifier.getBoundingClientRect().bottom;
+      console.log(resumeScrollBottom);
+      if (resumeScrollTop < 0 && resumeScrollBottom - windowHeight > 0) {
+        //1.5
+        console.log(
+          `Porcentagem até o próximo step: ${percentage.toFixed(2)}%`
+        );
       }
     }
   };
@@ -87,7 +90,10 @@ export default function NotebookExperiences() {
   }, [currentExperience]);
 
   return (
-    <section id="resumeScrollVerifier" className="w-full relative" style={{ height: "400vh" }}>
+    <section
+      id="resumeScrollVerifier"
+      className="w-full relative"
+      style={{ height: "400vh" }}>
       <div className="absolute inset-0">
         <StickyBox
           offsetTop={0}
