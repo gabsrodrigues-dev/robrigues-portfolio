@@ -4,20 +4,32 @@ import { useState, useEffect } from "react";
 
 const experiences = [
   [
-    { title: "titulo 1", description: "descrição 1" },
-    { title: "titulo 2", description: "descrição 2" },
-    { title: "titulo 3", description: "descrição 3" }
+    { title: "Participação e contribuição em ecossistema de ensino", description: "Aplicação de conhecimento de NodeJs, ReactJs, e Angular em sistemas em prol da educação." },
+    { title: "Reconstrução de Websites em linguagens otimizadas", description: "Utilizando do framework NextJs, tenho experiência em desenvolver com fidelidade ao design original diversos sites em NextJs, visando performance e SEO." },
+    {
+      title: "Criação de sistemas integrados a aplicações externas",
+      description:
+        "Crio e gerencio aplicações com injeções DOM em aplicações externas, como a inserção de um sistema ao Whatsapp Web."
+    },
   ],
   [
-    { title: "titulo 4", description: "descrição 4" },
-    { title: "titulo 5", description: "descrição 5" },
-    { title: "titulo 6", description: "descrição 6" }
-  ],
-  [
-    { title: "titulo 7", description: "descrição 7" },
-    { title: "titulo 8", description: "descrição 8" },
-    { title: "titulo 9", description: "descrição 9" }
-  ]
+    {
+      title: "+5 mil atualizações criadas no GitHub",
+      description:
+        "Cada atualização, correção, e novidade programada é um aprendizado novo."
+      },
+      { title: "+100.000 acessos mensais nos sistemas com minha participação", description: "Contando com minha cooperação, os sistemas no qual tive a oportunidade conseguem alcançar este alto número mensal de acessos todos os meses." },
+      { title: "+1.5 anos de experiência nas linguagens Front-End", description: "Iniciando por NextJs, na qual este site foi desenvolvido, também tenho experiência front-end em ReactJs e AngularJs" }
+    ],
+    [
+      {
+        title: "Paticipação em Sistemas em escala White Label",
+        description:  
+          "Sistemas modulares, com milhões de requisições todos os meses."
+      },
+      { title: "Criação de biblioteca nacional para DEVS", description: "Instalado mais de 10 mil vezes, a biblioteca NPM br-national-services é utilizada para funções de geração e validação de itens nacionais." },
+      { title: "Contrução modularizada em JS de um BOT no Whatsapp", description: "Com 9 meses de idade, o BOT a partir de prompts de texto, utilizando I.A., é capaz de gerar texto, construir imagens, e replicar voz de diversos artistas." }
+    ],
 ];
 
 export default function NotebookExperiences() {
@@ -101,22 +113,29 @@ export default function NotebookExperiences() {
           className="h-screen flex justify-center">
           <div
             id="resumeSection"
-            className="flex items-center justify-between w-full max-w-[1170px]">
-            <div className="min-w-[700px] relative">
-              <div className="bg-gradient-to-r -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
+            className="flex items-center w-full max-w-[1170px] md:justify-between">
+              
+            <div className="min-w-[700px] relative max-md:hidden">
+              <div className="bg-gradient-to-r z-[100] -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
               <Image
                 src="/images/notebookExperiences/notebookExperiencesNotebook.webp"
                 alt="Notebook"
                 width={700}
                 height={500}
-                className="-ml-[200px]"
+                className="-ml-[100px]"
               />
+              <div className="absolute w-[533px] h-[330px] left-[-13px] top-[28px] select-none overflow-hidden">
+              <h1 className="text-3xl font-bold -mt-4 -ml-1 text-red-500">
+                Vai ter algo aqui em breve</h1>
+              <h1 className="text-3xl font-bold -mb-4 -mr-1 text-red-500 absolute bottom-0 right-0">
+                Por enquanto, só construindo</h1>
+                </div>
             </div>
-            <div className="flex flex-col h-full max-h-[290px] justify-between">
+            <div className="flex flex-col h-full max-h-[500px] justify-between max-md:max-h-[380px]">
               {experiences[
                 animateStep !== 1 ? currentExperience : lastExperience
               ].map((content, index) => (
-                <div key={index} className="flex flex-col items-end">
+                <div key={index} className="flex flex-col items-end gap-1">
                   <h1
                     className={`transition-all text-3xl font-bold ${
                       animateStep === 1
@@ -128,7 +147,7 @@ export default function NotebookExperiences() {
                       animateStep === 1 && index === 1
                         ? "delay-[60ms]"
                         : index === 2 && "delay-[90ms]"
-                    }`}>
+                    } max-md:text-xl`}>
                     {content.title}
                   </h1>
                   <p
@@ -142,7 +161,7 @@ export default function NotebookExperiences() {
                       animateStep === 1 && index === 1
                         ? "delay-[60ms]"
                         : index === 2 && "delay-[90ms]"
-                    }`}>
+                    } max-md:text-sm`}>
                     {content.description}
                   </p>
                 </div>
