@@ -6,7 +6,19 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {},
+  theme: {
+    extend: {
+      animation: {
+        'random-scale': 'scale-variation 6s ease-in-out infinite',
+      },
+      keyframes: {
+        'scale-variation': {
+          '0%, 100%': { transform: 'scale(0.95)' },
+          '50%': { transform: 'scale(1)' },
+        },
+      },
+    },
+  },
   plugins: [],
 };
 export default config;

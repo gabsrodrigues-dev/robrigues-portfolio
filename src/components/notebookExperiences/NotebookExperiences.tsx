@@ -136,8 +136,8 @@ export default function NotebookExperiences() {
                 animateStep !== 1 ? currentExperience : lastExperience
               ].map((content, index) => (
                 <div key={index} className="flex flex-col items-end gap-1">
-                  <h1
-                    className={`transition-all text-3xl font-bold ${
+                  <h3
+                    className={`transition-all w-full text-3xl font-bold ${
                       animateStep === 1
                         ? "opacity-0 translate-y-[-30%] duration-300"
                         : animateStep === 2
@@ -149,7 +149,7 @@ export default function NotebookExperiences() {
                         : index === 2 && "delay-[90ms]"
                     } max-md:text-xl`}>
                     {content.title}
-                  </h1>
+                  </h3>
                   <p
                     className={`transition-all text-lg ${
                       animateStep === 1

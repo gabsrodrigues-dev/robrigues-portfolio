@@ -11,8 +11,7 @@ export default function Home() {
         <MainSection />
         <AboutMeSection />
         <NotebookExperiences />
-        {/* <ToolsSection />
-        <div className="h-[500vh] w-full bg-gradient-to-b from-black to-white"/> */}
+        <ToolsSection />
       </main>
     </main>
   )
