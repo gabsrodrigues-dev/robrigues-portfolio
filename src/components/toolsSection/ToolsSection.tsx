@@ -1,6 +1,31 @@
 export default function ToolsSection() {
+  const items = [
+    { text: 'NextJs', style: 'absolute left-[2px] text-[36px]' },
+    { text: 'Puppeteer', style: 'absolute top-[25px] left-[125px]' },
+    { text: 'NPM', style: 'absolute top-[24px] left-[212px] text-[24px]' },
+    { text: 'Tailwind CSS', style: 'absolute top-[52px] left-[18px]' },
+    { text: 'Vercel', style: 'absolute top-[67px] left-[145px]' },
+    { text: 'MongoDB', style: 'absolute top-[65px] left-[232px]' },
+    { text: 'Typescript', style: 'absolute top-[80px] left-[50px]' },
+    { text: 'JavaScript', style: 'absolute top-[85px] left-[155px] text-[36px]' },
+    { text: 'Node.js', style: 'absolute top-[120px] left-[50px] text-[24px]' },
+    { text: 'Git', style: 'absolute top-[148px] left-[135px]' },
+    { text: 'PWA (Progressive Web Apps)', style: 'absolute top-[145px] left-[168px]' },
+    { text: 'Redux', style: 'absolute top-[170px] left-[20px]' },
+    { text: 'API', style: 'absolute top-[177px] left-[83px]' },
+    { text: 'Moment.js', style: 'absolute top-[186px] left-[124px]' },
+    { text: 'HTML', style: 'absolute top-[177px] left-[210px]' },
+    { text: 'CSS', style: 'absolute top-[190px] left-[265px]' },
+    { text: 'React', style: 'absolute top-[200px] left-[2px] text-[36px]' },
+    { text: 'Postman', style: 'absolute top-[220px] left-[155px]' },
+  ];
+
+  function getRandomDelay() {
+    return `${Math.random() * 6}s`;
+  }
+
   return (
-    <div className="flex w-full justify-between items-center gap-6">
+    <div className="flex w-full justify-between items-center gap-6 max-md:flex-col">
       <div className="flex flex-col justify--center gap-3 max-w-[600px]">
         <span className="text-[2.625rem] leading-none">
           <span className="text-[#FAFF00]">Habilidades</span> e ferramentas
@@ -9,25 +34,16 @@ export default function ToolsSection() {
         Sinta-se livre para checar as ferramentas utilizadas na base de alguns projetos pessoais e profissionais. Para uma descrição mais detalhada, por favor, me contate. Terei prazer em atender e entender! 
         </span>
       </div>
-      <div className="w-[400px] h-[350px] text-[14px] font-semibold relative bg-red-500/45">
-      <span className="absolute text-[36px]">NextJs</span>
-      <span className="absolute top-[24px] left-[140px]">Puppeteer</span>
-      <span className="absolute top-[20px] left-[240px] text-[24px]">NPM</span>
-      <span className="absolute top-[55px] left-[20px]">Tailwind CSS</span>
-      <span className="absolute">Vercel</span>
-      <span className="absolute">MongoDB</span>
-      <span className="absolute">Typescript</span>
-      <span className="absolute">JavaScript</span>
-      <span className="absolute">Node.js</span>
-      <span className="absolute">Git</span>
-      <span className="absolute">PWA (Progressive Web Apps)</span>
-      <span className="absolute">Redux</span>
-      <span className="absolute">API</span>
-      <span className="absolute">Moment.js</span>
-      <span className="absolute">HTML</span>
-      <span className="absolute">CSS</span>
-      <span className="absolute">React</span>
-      <span className="absolute">Postman</span>
+      <div className="w-[340px] h-[260px] text-[14px] font-normal relative">
+      {items.map((item, index) => (
+        <span
+          key={index}
+          className={`${item.style} animate-random-scale`}
+          style={{ animationDelay: getRandomDelay() }}
+        >
+          {item.text}
+        </span>
+      ))}
       </div>
     </div>
   );
