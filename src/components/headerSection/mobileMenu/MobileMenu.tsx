@@ -21,6 +21,7 @@ const MobileMenu = () => {
     <div className={`${styles.menu}`}>
       {headerOptions.map((option, index) => (
         <MenuItem
+          key={index}
           icon={option.icon}
           link={option.id}
           selected={selected}

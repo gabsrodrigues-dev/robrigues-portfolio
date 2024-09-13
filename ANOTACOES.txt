@@ -1,1 +1,3 @@
 guardar umas constantes e funcoes repetidas (tipo headersection e mobilemenu) dentro de um service
+
+verificar performance e legibilidade deo codigo em sites de terceiro. tem muito h com tag <span>

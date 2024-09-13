@@ -55,9 +55,9 @@ export default function AboutMeSection() {
         <div className="flex justify-between items-center w-full">
           <div className="flex w-fit flex-col items-end">
             <span className="text-lg leading-none">quem sou eu,</span>
-            <div className="text-[2.625rem] uppercase leading-none">
+            <span className="text-[2.625rem] uppercase leading-none">
               Afinal?
-            </div>
+            </span>
           </div>
           <div>
             <Image
