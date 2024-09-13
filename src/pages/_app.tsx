@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { Alatsi } from "next/font/google";
 
 const alatsi = Alatsi({
-  weight: ["400"],
+  weight: "400",
   subsets: ["latin"],
 });
 

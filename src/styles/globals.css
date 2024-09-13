@@ -19,3 +19,9 @@ html {
     transform: translateY(0);
   }
 }
+
+@layer base {
+  body {
+    font-family: var(--font-alatsi);
+  }
+}
