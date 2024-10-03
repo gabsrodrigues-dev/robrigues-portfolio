@@ -21,7 +21,7 @@ export default function ToolsSection() {
   ];
 
   function getRandomDelay() {
-    return `${Math.random() * 6}s`;
+    return `${(Math.random() * 6).toFixed(2)}s`;
   }
 
   return (

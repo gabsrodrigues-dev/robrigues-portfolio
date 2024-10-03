@@ -40,7 +40,7 @@ export default function NotebookExperiences() {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const stepHeight = window.innerHeight; //1.5
+    const stepHeight = window.innerHeight;
     const newExperience = Math.min(3, Math.floor(scrollTop / stepHeight));
     const calculatedExperience = newExperience <= 1 ? 0 : newExperience - 1;
 
@@ -62,7 +62,6 @@ export default function NotebookExperiences() {
         resumeScrollVerifier.getBoundingClientRect().bottom;
       console.log(resumeScrollBottom);
       if (resumeScrollTop < 0 && resumeScrollBottom - windowHeight > 0) {
-        //1.5
         console.log(
           `Porcentagem até o próximo step: ${percentage.toFixed(2)}%`
         );
@@ -151,7 +150,7 @@ export default function NotebookExperiences() {
                     {content.title}
                   </h3>
                   <p
-                    className={`transition-all text-lg ${
+                    className={`transition-all w-full text-lg ${
                       animateStep === 1
                         ? "opacity-0 translate-y-[-30%] duration-300"
                         : animateStep === 2
