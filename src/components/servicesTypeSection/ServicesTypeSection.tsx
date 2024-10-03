@@ -41,7 +41,7 @@ export default function ServicesTypeSection() {
         <span className="text-lg">
           There are many variation of passages of Lorem Ipsum availale but the
           majority have suffered alteration in some form, by injected humor, or
-          randomised words which don't look even slightly believable.
+          randomised words which dont look even slightly believable.
         </span>
       </div>
       <div className="flex flex-col gap-6">
