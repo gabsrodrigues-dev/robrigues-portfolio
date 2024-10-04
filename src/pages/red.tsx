@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const redirections = [
-  { name: 'Vídeo da Thaís', link: 'https://youtu.be/SSd0EdlbWqc', url: 'thay031024' },
-  { name: 'facebook', link: 'https://www.facebook.com', url: 'facebook' },
-  { name: 'github', link: 'https://www.github.com', url: 'github' },
+  { name: 'Vídeo da Thaís', link: 'https://youtu.be/1FAi4QYdzoY', url: 'thay031024' },
+  { name: 'Insta do gabs', link: 'https://www.instagram.com/gabriel_torresr', url: 'gabinsta1024' },
 ];
 
 const Red = () => {
