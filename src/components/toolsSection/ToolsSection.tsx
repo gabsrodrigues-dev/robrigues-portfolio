@@ -30,7 +30,7 @@ export default function ToolsSection() {
         <span className="text-[2.625rem] leading-none">
           <span className="text-[#FAFF00]">Habilidades</span> e ferramentas
         </span>
-        <span className="text-lg">
+        <span className="text-lg text-[#959595]">
         Sinta-se livre para checar as ferramentas utilizadas na base de alguns projetos pessoais e profissionais. Para uma descrição mais detalhada, por favor, me contate. Terei prazer em atender e entender! 
         </span>
       </div>

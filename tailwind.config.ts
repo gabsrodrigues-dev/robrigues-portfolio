@@ -9,11 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        'random-scale': 'scale-variation 6s ease-in-out infinite',
+        // 'random-scale': 'scale-variation 6s ease-in-out infinite',
+        'random-scale': 'scale-variation 5s ease-in-out infinite',
       },
       keyframes: {
         'scale-variation': {
-          '0%, 100%': { transform: 'scale(0.95)' },
+          '0%, 100%': { transform: 'scale(0.92)' },
           '50%': { transform: 'scale(1)' },
         },
       },
