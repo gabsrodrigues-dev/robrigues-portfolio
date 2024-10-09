@@ -160,7 +160,7 @@ export default function NotebookExperiences() {
                       animateStep === 1 && index === 1
                         ? "delay-[60ms]"
                         : index === 2 && "delay-[90ms]"
-                    } max-md:text-sm`}>
+                    } max-md:text-sm text-[#959595]`}>
                     {content.description}
                   </p>
                 </div>
