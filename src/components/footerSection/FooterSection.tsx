@@ -21,18 +21,18 @@ import moment from "moment";
 export default function FooterSection() {
   const currentHour = moment().hour();
   const timeIcons = [
-    <WiTime12 size={22} />,
-    <WiTime1 size={22} />,
-    <WiTime2 size={22} />,
-    <WiTime3 size={22} />,
-    <WiTime4 size={22} />,
-    <WiTime5 size={22} />,
-    <WiTime6 size={22} />,
-    <WiTime7 size={22} />,
-    <WiTime8 size={22} />,
-    <WiTime9 size={22} />,
-    <WiTime10 size={22} />,
-    <WiTime11 size={22} />
+    <WiTime12 key={12} size={22} />,
+    <WiTime1 key={1} size={22} />,
+    <WiTime2 key={2} size={22} />,
+    <WiTime3 key={3} size={22} />,
+    <WiTime4 key={4} size={22} />,
+    <WiTime5 key={5} size={22} />,
+    <WiTime6 key={6} size={22} />,
+    <WiTime7 key={7} size={22} />,
+    <WiTime8 key={8} size={22} />,
+    <WiTime9 key={9} size={22} />,
+    <WiTime10 key={10} size={22} />,
+    <WiTime11 key={11} size={22} />
   ];
   const timeIcon = timeIcons[currentHour % 12];
   const onlineStatus =
@@ -83,6 +83,7 @@ export default function FooterSection() {
               {contacts.map((contact, index) =>
                 contact.link ? (
                   <Link
+                    key={index}
                     href={contact.link}
                     className="flex items-center gap-x-3">
                     {contact.icon}{" "}
@@ -91,7 +92,7 @@ export default function FooterSection() {
                     </p>
                   </Link>
                 ) : (
-                  <div className="flex items-center gap-x-3">
+                  <div key={index} className="flex items-center gap-x-3">
                     {contact.icon}{" "}
                     <p className="text-lg text-white leading-none">
                       {contact.name}
