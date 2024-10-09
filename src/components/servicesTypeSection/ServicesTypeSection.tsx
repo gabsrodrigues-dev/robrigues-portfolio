@@ -68,9 +68,9 @@ export default function ServicesTypeSection() {
       ref={servicesRef}
       className="flex flex-col p-12 rounded-3xl shadow-2xl gap-12 items-center bg-[#0E0B20] overflow-hidden group">
       <div className="flex flex-col gap-3 text-center max-w-[70%]">
-        <span className="text-[2.625rem] leading-none">
+        <h2 className="text-[2.625rem] leading-none">
           Fornecendo a Você o Meu Melhor Serviço
-        </span>
+        </h2>
         <span className="text-lg text-[#959595]">
           Existem muitas variações de passagens do Lorem Ipsum disponíveis, mas
           a maioria sofreu alguma alteração, seja por inserção de humor ou
