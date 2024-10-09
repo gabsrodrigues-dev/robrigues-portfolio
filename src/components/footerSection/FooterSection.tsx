@@ -2,21 +2,43 @@ import Link from "next/link";
 import { FaTimes, FaWhatsapp } from "react-icons/fa";
 import { PiLinkedinLogoBold } from "react-icons/pi";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import { WiTime1, WiTime2, WiTime3, WiTime4, WiTime5, WiTime6, WiTime7, WiTime8, WiTime9, WiTime10, WiTime11, WiTime12 } from "react-icons/wi";
+import {
+  WiTime1,
+  WiTime2,
+  WiTime3,
+  WiTime4,
+  WiTime5,
+  WiTime6,
+  WiTime7,
+  WiTime8,
+  WiTime9,
+  WiTime10,
+  WiTime11,
+  WiTime12
+} from "react-icons/wi";
 import moment from "moment";
 
 export default function FooterSection() {
   const currentHour = moment().hour();
-
   const timeIcons = [
-    <WiTime12 size={22} />, <WiTime1 size={22} />, <WiTime2 size={22} />, <WiTime3 size={22} />, <WiTime4 size={22} />,
-    <WiTime5 size={22} />, <WiTime6 size={22} />, <WiTime7 size={22} />, <WiTime8 size={22} />, <WiTime9 size={22} />,
-    <WiTime10 size={22} />, <WiTime11 size={22} />
+    <WiTime12 size={22} />,
+    <WiTime1 size={22} />,
+    <WiTime2 size={22} />,
+    <WiTime3 size={22} />,
+    <WiTime4 size={22} />,
+    <WiTime5 size={22} />,
+    <WiTime6 size={22} />,
+    <WiTime7 size={22} />,
+    <WiTime8 size={22} />,
+    <WiTime9 size={22} />,
+    <WiTime10 size={22} />,
+    <WiTime11 size={22} />
   ];
-
   const timeIcon = timeIcons[currentHour % 12];
-
-  const onlineStatus = currentHour >= 7 && currentHour <= 22 ? "Estou on-line!" : "Estarei disponível em breve!";
+  const onlineStatus =
+    currentHour >= 7 && currentHour <= 22
+      ? "Estou on-line!"
+      : "Estarei disponível em breve!";
 
   const contacts = [
     {
