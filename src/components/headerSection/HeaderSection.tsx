@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import MobileMenu from "./mobileMenu/MobileMenu";
+import Link from "next/link";
 
 const headerOptions = [
   { name: "Início", offset: 128, id: "mainSection" },
@@ -106,6 +107,9 @@ export default function HeaderSection() {
               </span>
             </div>
             <ul className="flex items-center justify-center gap-8 max-md:hidden">
+                <Link className={`cursor-pointer text-[#FAFF00]`} href="/status">
+                 EM BREVE
+                </Link>
               {headerOptions.map((option, index) => (
                 <li
                   key={index}
