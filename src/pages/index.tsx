@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px] max-md:px-[5vw] pb-12">
         <MainSection />
         <AboutMeSection />
-        <NotebookExperiences />
+        {/* <NotebookExperiences /> */}
         <ToolsSection />
         <ServicesTypeSection />
       </main>
