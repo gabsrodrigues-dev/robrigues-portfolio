@@ -31,15 +31,25 @@ export default function ServicesTypeSection({ translations }: any) {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    // one slide on < 768 width
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
 
   return (
     <section
       ref={servicesRef}
-      className="flex flex-col p-12 rounded-3xl shadow-2xl gap-12 items-center bg-[#0E0B20] overflow-hidden group"
+      className="flex flex-col p-12 rounded-3xl shadow-2xl gap-12 items-center bg-[#0E0B20] overflow-hidden group max-md:w-full max-md:px-[5vw]"
     >
-      <div className="flex flex-col gap-3 text-center max-w-[70%]">
+      <div className="flex flex-col gap-3 text-center md:max-w-[70%]">
         <h2 className="text-[2.625rem] leading-none">
           {translations.servicesTypeSection.title}
         </h2>
@@ -48,7 +58,7 @@ export default function ServicesTypeSection({ translations }: any) {
         </span>
       </div>
       <div
-        className="w-full relative"
+        className="w-full relative max-md:max-w-full max-md:force-max-w-full"
         style={{
           maxWidth: servicesRef.current?.clientWidth
             ? `${servicesRef.current?.clientWidth - 48 * 2}px`
@@ -57,7 +67,7 @@ export default function ServicesTypeSection({ translations }: any) {
       >
         <Slider ref={sliderRef} {...settings}>
         {services.map((service:any, index:number) => (
-            <div key={index} className="p-6">
+            <div key={index} className="p-6 max-md:p-[5vw]">
               <div className="flex flex-col p-12 gap-4 items-center justify-between rounded-3xl min-h-[330px]"
               style={{
                 boxShadow: "rgba(0, 0, 0, 0.6) 0px 0px 20px"
@@ -75,7 +85,7 @@ export default function ServicesTypeSection({ translations }: any) {
         <div className="absolute top-0 left-0 flex w-fit h-full items-center">
           <div className="w-[24px] h-full bg-gradient-to-r from-[#0E0B20] to-transparent left-0 absolute" />
           <div
-            className="p-3 cursor-pointer transition-all duration-300 -translate-x-24 opacity-0 group-hover:opacity-100 group-hover:-translate-x-10"
+            className="p-3 cursor-pointer transition-all duration-300 -translate-x-24 opacity-0 group-hover:opacity-100 group-hover:-translate-x-10 max-md:p-[5vw]"
             onClick={() => sliderRef.current?.slickPrev()}
           >
             <Image src="/images/assets/left-arrow.svg" alt="left arrow" width={32} height={32} />
@@ -84,7 +94,7 @@ export default function ServicesTypeSection({ translations }: any) {
         <div className="absolute top-0 right-0 flex w-fit h-full items-center">
           <div className="w-[24px] h-full bg-gradient-to-l from-[#0E0B20] to-transparent right-0 absolute" />
           <div
-            className="p-3 cursor-pointer transition-all duration-300 translate-x-24 opacity-0 group-hover:opacity-100 group-hover:translate-x-10"
+            className="p-3 cursor-pointer transition-all duration-300 translate-x-24 opacity-0 group-hover:opacity-100 group-hover:translate-x-10 max-md:p-[5vw]"
             onClick={() => sliderRef.current?.slickNext()}
           >
             <Image src="/images/assets/right-arrow.svg" alt="right arrow" width={32} height={32} />
