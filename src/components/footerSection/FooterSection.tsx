@@ -103,6 +103,13 @@ export default function FooterSection() {
             </div>
           </div>
         </div>
+        <div className="flex">
+          <form className="flex flex-col gap-6">
+            <input className="p-3 bg-white" placeholder="E-mail"/>
+            <input className="p-3 bg-white" placeholder="Assunto"/>
+            <textarea className="p-3 bg-white" placeholder="Conteúdo"/>
+          </form>
+        </div>
       </div>
     </footer>
   );

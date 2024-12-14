@@ -107,9 +107,9 @@ export default function HeaderSection() {
               </span>
             </div>
             <ul className="flex items-center justify-center gap-8 max-md:hidden">
-                <Link className={`cursor-pointer text-[#FAFF00]`} href="/status">
+                {/* <Link className={`cursor-pointer text-[#FAFF00]`} href="/status">
                  EM BREVE
-                </Link>
+                </Link> */}
               {headerOptions.map((option, index) => (
                 <li
                   key={index}

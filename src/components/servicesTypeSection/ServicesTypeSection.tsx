@@ -66,7 +66,7 @@ export default function ServicesTypeSection() {
   return (
     <section
       ref={servicesRef}
-      className="flex flex-col p-12 rounded-3xl shadow-2xl gap-12 items-center bg-[#0E0B20] overflow-hidden group">
+      className="flex flex-col p-12 rounded-3xl shadow-2xl gap-12 items-center bg-[#0E0B20] overflow-hidden group mt-[25vh]">
       <div className="flex flex-col gap-3 text-center max-w-[70%]">
         <h2 className="text-[2.625rem] leading-none">
           Fornecendo a Você o Meu Melhor Serviço
