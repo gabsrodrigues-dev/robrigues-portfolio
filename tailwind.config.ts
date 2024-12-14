@@ -9,7 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        // 'random-scale': 'scale-variation 6s ease-in-out infinite',
         'random-scale': 'scale-variation 5s ease-in-out infinite',
       },
       keyframes: {

@@ -1,5 +1,8 @@
+// components/FooterSection.jsx
+
 import Link from "next/link";
-import { FaTimes, FaWhatsapp } from "react-icons/fa";
+import { useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { PiLinkedinLogoBold } from "react-icons/pi";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import {
@@ -17,8 +20,14 @@ import {
   WiTime12
 } from "react-icons/wi";
 import moment from "moment";
+import emailjs from "@emailjs/browser";
 
-export default function FooterSection() {
+export default function FooterSection({ translations, selectedLanguage }: any) {
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [statusMessage, setStatusMessage] = useState<null | string>(null);
+
   const currentHour = moment().hour();
   const timeIcons = [
     <WiTime12 key={12} size={22} />,
@@ -36,23 +45,23 @@ export default function FooterSection() {
   ];
   const timeIcon = timeIcons[currentHour % 12];
   const onlineStatus =
-    currentHour >= 7 && currentHour <= 22
-      ? "Estou on-line!"
-      : "Estarei disponível em breve!";
+    currentHour >= 6 && currentHour <= 23
+    ? translations.footerSection.contacts.onlineStatus
+    : translations.footerSection.contacts.offlineStatus;
 
   const contacts = [
     {
-      name: "(31) 99164-7507",
+      name: translations.footerSection.contacts.whatsapp,
       link: "https://api.whatsapp.com/send?phone=5531991647507",
       icon: <FaWhatsapp size={22} />
     },
     {
-      name: "gabriel14contato@gmail.com",
+      name: translations.footerSection.contacts.email,
       link: "mailto:gabriel14contato@gmail.com",
       icon: <MdOutlineMarkEmailUnread size={22} />
     },
     {
-      name: "LinkedIn",
+      name: translations.footerSection.contacts.linkedin,
       link: "https://www.linkedin.com/in/gabsrodrigues-dev",
       icon: <PiLinkedinLogoBold size={22} />
     },
@@ -62,23 +71,61 @@ export default function FooterSection() {
     }
   ];
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setStatusMessage(translations.footerSection.form.statusMessages.sending);
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
+    const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || "";
+
+    const templateParams = {
+      from_email: email,
+      subject: subject,
+      message: message
+    };
+
+    emailjs.send(serviceId, templateId, templateParams, userId).then(
+      (response) => {
+        setStatusMessage(
+          translations.footerSection.form.statusMessages.success
+        );
+        setEmail("");
+        setSubject("");
+        setMessage("");
+      },
+      (err) => {
+        console.error("FAILED...", err);
+        setStatusMessage(translations.footerSection.form.statusMessages.error);
+      }
+    );
+  };
+
   return (
     <footer className="flex w-full h-full py-24 bg-[#0E0B20] justify-center max-md:px-[5vw]">
-      <div className="flex w-full max-w-[1170px] justify-between items-center">
+      <div className="flex w-full max-w-[1170px] justify-between items-end">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col">
             <h2 className="text-[2.625rem] leading-none">
-              Vamos Conversar Sobre o
+              {translations.footerSection.titlePart1}
             </h2>
             <div className="relative">
-              <h2 className="text-[2.625rem] leading-none">Seu Projeto</h2>
-              <div className="absolute bottom-0 left-[0px] w-[125px] h-[2px] bg-white" />
-              <div className="absolute bottom-0 right-[243px] w-[52px] h-[2px] bg-white" />
+              <h2 className="text-[2.625rem] leading-none">
+                {translations.footerSection.titlePart2}
+              </h2>
+              {selectedLanguage.acronym === "br" && (
+                <>
+                  <div className="absolute bottom-0 left-[0px] w-[125px] h-[2px] bg-white" />
+                  <div className="absolute bottom-0 right-[243px] w-[52px] h-[2px] bg-white" />
+                </>
+              )}
             </div>
           </div>
 
           <div className="flex flex-col gap-6 w-full">
-            <p className="text-2xl text-white leading-none">Contato Rápido</p>
+            <p className="text-2xl text-white leading-none">
+              {translations.footerSection.quickContact}
+            </p>
             <div className="flex flex-col gap-3 w-full">
               {contacts.map((contact, index) =>
                 contact.link ? (
@@ -103,11 +150,48 @@ export default function FooterSection() {
             </div>
           </div>
         </div>
-        <div className="flex">
-          <form className="flex flex-col gap-6">
-            <input className="p-3 bg-white" placeholder="E-mail"/>
-            <input className="p-3 bg-white" placeholder="Assunto"/>
-            <textarea className="p-3 bg-white" placeholder="Conteúdo"/>
+        <div className="flex min-w-[350px]">
+          <form
+            className="flex flex-col gap-6 w-full relative"
+            onSubmit={handleSubmit}>
+            <input
+              disabled={statusMessage ? true : false}
+              className="p-3 bg-white text-black rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 transition resize-none"
+              placeholder={translations.footerSection.form.email}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              disabled={statusMessage ? true : false}
+              className="p-3 bg-white text-black rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 transition resize-none"
+              placeholder={translations.footerSection.form.subject}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              required
+            />
+            <textarea
+              disabled={statusMessage ? true : false}
+              className="p-3 bg-white text-black rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 transition resize-none"
+              placeholder={translations.footerSection.form.message}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+            <button
+              disabled={statusMessage ? true : false}
+              className="bg-white text-black p-3 rounded-lg shadow-md focus:outline-none"
+              type="submit">
+              {statusMessage
+                ? translations.footerSection.form.buttonSent
+                : translations.footerSection.form.buttonSend}
+            </button>
+            {statusMessage && (
+              <p className="text-white absolute -bottom-8 left-0">
+                {statusMessage}
+              </p>
+            )}
           </form>
         </div>
       </div>

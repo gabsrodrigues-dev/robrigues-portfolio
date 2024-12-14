@@ -1,6 +1,9 @@
+// /components/AboutMeSection.tsx
+
+import React from "react";
 import Image from "next/image";
 
-export default function AboutMeSection() {
+export default function AboutMeSection({ translations }: any) {
   return (
     <section id="aboutMeSection" className="flex w-full justify-between items-center max-md:flex-col gap-12">
       <div className="max-md:pb-6 max-md:w-full">
@@ -54,9 +57,9 @@ export default function AboutMeSection() {
       <div className="flex flex-col w-full h-full gap-6 max-w-[480px] max-md:max-w-full">
         <div className="flex justify-between items-center w-full">
           <div className="flex w-fit flex-col items-end">
-            <span className="text-lg leading-none">quem sou eu,</span>
+            <span className="text-lg leading-none">{translations.aboutMeSection.quemSouEu}</span>
             <span className="text-[2.625rem] uppercase leading-none">
-              Afinal?
+              {translations.aboutMeSection.afinal}
             </span>
           </div>
           <div>
@@ -71,16 +74,10 @@ export default function AboutMeSection() {
           </div>
         </div>
         <p className="text-lg max-lg:text-justify">
-          Eu sou um desenvolvedor independente, sempre em busca de conhecimento.
-          Já possuo experiência por mais de um ano como desenvolvedor front-end,
-          atuando em construção de sistemas front-end desde o início, como em
-          reconstrução de sistemas em linguagens mais otimizadas.
+          {translations.aboutMeSection.paragrafo1}
         </p>
         <p className="text-lg max-lg:text-justify">
-          Nestes projetos – principalmente nos de reconstrução –, sempre viso o
-          desempenho e performance do website, visto que são projetos que
-          recebem centenas de milhares de acessos todos os meses, requirindo o
-          SEO de máxima excelência.
+          {translations.aboutMeSection.paragrafo2}
         </p>
       </div>
     </section>
