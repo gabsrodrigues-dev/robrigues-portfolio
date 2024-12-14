@@ -103,7 +103,7 @@ export default function FooterSection({ translations, selectedLanguage }: any) {
 
   return (
     <footer className="flex w-full h-full py-24 bg-[#0E0B20] justify-center max-md:px-[5vw]">
-      <div className="flex w-full max-w-[1170px] justify-between items-end">
+      <div className="flex w-full max-w-[1170px] justify-between md:items-end max-md:flex-col max-md:gap-12">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col">
             <h2 className="text-[2.625rem] leading-none">
@@ -150,7 +150,7 @@ export default function FooterSection({ translations, selectedLanguage }: any) {
             </div>
           </div>
         </div>
-        <div className="flex min-w-[350px]">
+        <div className="flex md:min-w-[350px] max-md:w-full">
           <form
             className="flex flex-col gap-6 w-full relative"
             onSubmit={handleSubmit}>

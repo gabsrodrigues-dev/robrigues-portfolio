@@ -6,6 +6,11 @@ html {
   background: #070514;
 }
 
+@media not all and (min-width: 768px) {
+  .max-md\:force-max-w-full {
+      max-width: 100% !important;
+  }
+}
 .slide-from-top {
   animation: slideFromTop 0.2s ease-out;
 }
