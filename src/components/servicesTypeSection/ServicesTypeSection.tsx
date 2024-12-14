@@ -12,12 +12,12 @@ import {
 import Image from "next/image";
 
 const serviceLogos = [
-  <FaBlog className="text-white" />,
-  <FaShoppingCart className="text-white" />,
-  <FaReact className="text-white" />,
-  <FaFileAlt className="text-white" />,
-  <FaMobileAlt className="text-white" />,
-  <FaMobileAlt className="text-white" />
+  <FaBlog key={0} className="text-white" />,
+  <FaShoppingCart key={1} className="text-white" />,
+  <FaReact key={2} className="text-white" />,
+  <FaFileAlt key={3} className="text-white" />,
+  <FaMobileAlt key={4} className="text-white" />,
+  <FaMobileAlt key={5} className="text-white" />
 ];
 export default function ServicesTypeSection({ translations }: any) {
   const servicesRef = useRef<HTMLElement | null>(null);
