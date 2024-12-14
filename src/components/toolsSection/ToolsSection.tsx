@@ -1,4 +1,4 @@
-export default function ToolsSection() {
+export default function ToolsSection({ translations }: any) {
   const items = [
     { text: 'NextJs', style: 'absolute left-[2px] text-[36px]' },
     { text: 'Puppeteer', style: 'absolute top-[25px] left-[125px]' },
@@ -20,6 +20,7 @@ export default function ToolsSection() {
     { text: 'Postman', style: 'absolute top-[220px] left-[155px]' },
   ];
 
+
   function getRandomDelay() {
     return `${(Math.random() * 6).toFixed(2)}s`;
   }
@@ -28,22 +29,22 @@ export default function ToolsSection() {
     <div className="flex w-full justify-between items-center gap-6 max-md:flex-col">
       <div className="flex flex-col justify--center gap-3 max-w-[600px]">
         <h2 className="text-[2.625rem] leading-none">
-          <span className="text-[#FAFF00]">Habilidades</span> e Ferramentas
+          <span className="text-[#FAFF00]">{translations.toolsSection.title.split(' ')[0]}</span> {translations.toolsSection.title.split(' ').slice(1).join(' ')}
         </h2>
         <span className="text-lg text-[#959595]">
-        Sinta-se livre para checar as ferramentas utilizadas na base de alguns projetos pessoais e profissionais. Para uma descrição mais detalhada, por favor, me contate. Terei prazer em atender e entender! 
+          {translations.toolsSection.description}
         </span>
       </div>
       <div className="w-[340px] h-[260px] text-[14px] font-normal relative">
-      {items.map((item, index) => (
-        <span
-          key={index}
-          className={`${item.style} animate-random-scale`}
-          style={{ animationDelay: getRandomDelay() }}
-        >
-          {item.text}
-        </span>
-      ))}
+        {items.map((item, index) => (
+          <span
+            key={index}
+            className={`${item.style} animate-random-scale`}
+            style={{ animationDelay: getRandomDelay() }}
+          >
+            {item.text}
+          </span>
+        ))}
       </div>
     </div>
   );

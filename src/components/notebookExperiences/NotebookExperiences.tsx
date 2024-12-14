@@ -32,11 +32,18 @@ const experiences = [
     ],
 ];
 
-export default function NotebookExperiences() {
+export default function NotebookExperiences({ translations }: any) {
   const [currentExperience, setCurrentExperience] = useState(0);
   const [lastExperience, setLastExperience] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [animateStep, setAnimateStep] = useState(0);
+
+  const sections = translations.notebookExperiences.sections;
+  const chunkSize = 3;
+  const experiences = [];
+  for (let i = 0; i < sections.length; i += chunkSize) {
+    experiences.push(sections.slice(i, i + chunkSize));
+  }
 
   const handleScroll = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -113,7 +120,6 @@ export default function NotebookExperiences() {
           <div
             id="resumeSection"
             className="flex items-center w-full max-w-[1170px] md:justify-between">
-              
             <div className="min-w-[700px] relative max-md:hidden">
               <div className="bg-gradient-to-r z-[100] -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
               <Image
@@ -124,16 +130,18 @@ export default function NotebookExperiences() {
                 className="-ml-[100px]"
               />
               <div className="absolute w-[533px] h-[330px] left-[-13px] top-[28px] select-none overflow-hidden">
-              <h1 className="text-3xl font-bold -mt-4 -ml-1 text-red-500">
-                Vai ter algo aqui em breve</h1>
-              <h1 className="text-3xl font-bold -mb-4 -mr-1 text-red-500 absolute bottom-0 right-0">
-                Por enquanto, só construindo</h1>
-                </div>
+                <h1 className="text-3xl font-bold -mt-4 -ml-1 text-red-500">
+                  {translations.notebookExperiences.title1}
+                </h1>
+                <h1 className="text-3xl font-bold -mb-4 -mr-1 text-red-500 absolute bottom-0 right-0">
+                  {translations.notebookExperiences.title2}
+                </h1>
+              </div>
             </div>
             <div className="flex flex-col h-full max-h-[500px] justify-between max-md:max-h-[380px]">
               {experiences[
                 animateStep !== 1 ? currentExperience : lastExperience
-              ].map((content, index) => (
+              ].map((content: any, index: number) => (
                 <div key={index} className="flex flex-col items-end gap-1">
                   <h3
                     className={`transition-all w-full text-3xl font-bold ${
@@ -146,7 +154,8 @@ export default function NotebookExperiences() {
                       animateStep === 1 && index === 1
                         ? "delay-[60ms]"
                         : index === 2 && "delay-[90ms]"
-                    } max-md:text-xl`}>
+                    } max-md:text-xl`}
+                  >
                     {content.title}
                   </h3>
                   <p
@@ -160,7 +169,8 @@ export default function NotebookExperiences() {
                       animateStep === 1 && index === 1
                         ? "delay-[60ms]"
                         : index === 2 && "delay-[90ms]"
-                    } max-md:text-sm text-[#959595]`}>
+                    } max-md:text-sm text-[#959595]`}
+                  >
                     {content.description}
                   </p>
                 </div>

@@ -1,10 +1,15 @@
+// /components/mobileMenu/MobileMenu.tsx
+
 import React, { useState } from "react";
 import { FaHome, FaFire, FaCog } from "react-icons/fa";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import styles from "./Menu.module.css";
 
-const MobileMenu = () => {
+interface MobileMenuProps {
+  translations: any;
+}
+
+const MobileMenu: React.FC<MobileMenuProps> = ({ translations }) => {
   const [selected, setSelected] = useState("mainSection");
 
   const handleSelect = (link: string) => {
@@ -12,9 +17,9 @@ const MobileMenu = () => {
   };
 
   const headerOptions = [
-    { name: "Início", offset: 128, id: "mainSection", icon: <FaHome /> },
-    { name: "Resumo", offset: 0, id: "resumeSection", icon: <FaFire /> },
-    { name: "Contato", offset: 0, id: "contactSection", icon: <FaCog /> }
+    { key: "inicio", offset: 128, id: "mainSection", icon: <FaHome /> },
+    { key: "resumo", offset: 0, id: "resumeSection", icon: <FaFire /> },
+    { key: "contato", offset: 0, id: "contactSection", icon: <FaCog /> }
   ];
 
   return (
@@ -26,6 +31,8 @@ const MobileMenu = () => {
           link={option.id}
           selected={selected}
           handleSelect={handleSelect}
+          translation={translations[option.key]}
+          offset={option.offset}
         />
       ))}
     </div>
@@ -37,13 +44,17 @@ interface MenuItemProps {
   link: string;
   selected: string;
   handleSelect: (link: string) => void;
+  translation: string;
+  offset: number;
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({
   icon,
   link,
   selected,
-  handleSelect
+  handleSelect,
+  translation,
+  offset
 }) => {
   const isSelected = selected === link;
 
@@ -63,8 +74,10 @@ const MenuItem: React.FC<MenuItemProps> = ({
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
         className={`${styles.menuItem} ${isSelected ? styles.selected : ""}`}
-        onClick={() => handleScrollToSection(link, 0)}>
+        onClick={() => handleScrollToSection(link, offset)}
+      >
         {icon}
+        <span className={styles.menuText}>{translation}</span>
         {isSelected && (
           <motion.div
             className={styles.highlight}
