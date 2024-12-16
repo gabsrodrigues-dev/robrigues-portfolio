@@ -23,7 +23,7 @@ export default {
   servicesTypeSection: {
     title: "Proporcionándote mi Mejor Servicio",
     description:
-      "Hay muchas variaciones de pasajes de Lorem Ipsum disponibles, pero la mayoría ha sufrido alguna alteración, ya sea por la inclusión de humor o palabras aleatorias que no parecen nada convincentes.",
+      "Ofrecemos servicios de desarrollo web personalizados, enfocados en rendimiento, seguridad y usabilidad, para ayudarlo a alcanzar sus objetivos.",
     services: [
       {
         title: "Sitios Web para Blogs",
