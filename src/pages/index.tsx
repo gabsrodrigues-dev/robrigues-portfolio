@@ -49,7 +49,7 @@ export default function Home() {
       <main className="flex flex-col w-full items-center justify-center gap-12 max-w-[1170px] max-md:px-[5vw] pb-12">
         <MainSection translations={translations}/>
         <AboutMeSection translations={translations} />
-        {/* <NotebookExperiences translations={translations}/> */}
+        <NotebookExperiences translations={translations}/>
         <ToolsSection translations={translations}/>
         <ServicesTypeSection translations={translations}/>
       </main>

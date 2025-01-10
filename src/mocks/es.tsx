@@ -82,52 +82,53 @@ export default {
     }
   },
   notebookExperiences: {
-    title1: "Algo estará aquí pronto",
-    title2: "Por ahora, solo en construcción",
+    title1: "Contenidos en Construcción",
+    title2: "Por ahora, desarrollando grandes ideas",
     sections: [
       {
-        title: "Participación y contribución en el ecosistema educativo",
+        title: "Desarrollo Independiente de Extensión para Ventas",
         description:
-          "Aplicación de conocimientos en NodeJs, ReactJs y Angular en sistemas orientados a la educación."
+          "Creación de una extensión que optimizó procesos y fue indirectamente responsable de generar decenas de miles de reales en un solo mes, integrándose de manera eficiente con sistemas externos."
       },
       {
-        title: "Reconstrucción de Sitios Web en Lenguajes Optimizados",
+        title: "Reconstrucción de Sitios Web con Tecnologías Optimizadas",
         description:
-          "Usando el framework NextJs, tengo experiencia desarrollando varios sitios en NextJs con fidelidad al diseño original, buscando rendimiento y SEO."
+          "Especialista en el uso del framework Next.js, con experiencia en la construcción de sitios web altamente fieles al diseño original, enfocándose en un rendimiento avanzado y SEO de excelencia."
       },
       {
-        title: "Creación de Sistemas Integrados con Aplicaciones Externas",
+        title: "Contribución a Sistemas con Más de 100.000 Accesos Mensuales",
         description:
-          "Creo y gestiono aplicaciones con inyecciones de DOM en aplicaciones externas, como la inserción de un sistema en WhatsApp Web."
+          "Participación estratégica en el desarrollo y mantenimiento de sistemas que registran más de 100.000 accesos mensuales, garantizando escalabilidad y estabilidad."
       },
       {
-        title: "+5 mil actualizaciones creadas en GitHub",
+        title: "Más de 2 Años de Experiencia con Tecnologías Front-End",
         description:
-          "Cada actualización, corrección y nueva función es un nuevo aprendizaje."
+          "Dominio de Next.js, utilizado en la construcción de este portafolio, además de experiencia sólida en React.js y Angular.js, creando interfaces modernas y responsivas."
       },
       {
-        title: "+100.000 accesos mensuales en sistemas con mi participación",
+        title: "Desarrollo de Sistemas White Label a Gran Escala",
         description:
-          "Con mi cooperación, los sistemas en los que participé alcanzan este alto número de accesos mensuales."
+          "Participación en proyectos modulares de alto rendimiento, soportando millones de solicitudes mensuales en entornos de gran escala."
       },
       {
-        title: "+1.5 años de experiencia en lenguajes Front-End",
+        title: "Creación de una Biblioteca Nacional Reconocida",
         description:
-          "Comenzando con NextJs (en el cual se desarrolló este sitio), también tengo experiencia en front-end con ReactJs y AngularJs."
+          "Desarrollo de la biblioteca NPM **br-national-services**, con más de 15.000 descargas, ampliamente utilizada para la validación y generación de datos nacionales."
       },
       {
-        title: "Participación en Sistemas a Escala White Label",
-        description: "Sistemas modulares, con millones de solicitudes cada mes."
+        title: "Desarrollo de un Bot Modularizado para WhatsApp",
+        description:
+          "Construcción de un bot avanzado con más de un año de operación, capaz de generar textos, crear imágenes y replicar voces de artistas utilizando inteligencia artificial y prompts personalizados."
       },
       {
-        title: "Creación de Biblioteca Nacional para DEVS",
+        title: "Desarrollo de un Sistema de IA con Interfaz Animada",
         description:
-          "Instalada más de 10.000 veces, la biblioteca NPM 'br-national-services' se utiliza para generar y validar elementos nacionales."
+          "Creación de un chat interactivo con inteligencia artificial, utilizando animaciones avanzadas y estilización con TailwindCSS para una experiencia inmersiva y fluida."
       },
       {
-        title: "Construcción Modularizada en JS de un BOT para WhatsApp",
+        title: "Desarrollo de Sistemas de Gestión de Restaurantes",
         description:
-          "Con 9 meses de desarrollo, el BOT, utilizando prompts de texto e I.A., es capaz de generar texto, crear imágenes y replicar voces de varios artistas."
+          "Implementación de un sistema completo para la gestión de restaurantes, incluyendo integración con módulos de pedidos, menús dinámicos y seguimiento de solicitudes en tiempo real."
       }
     ]
   },
