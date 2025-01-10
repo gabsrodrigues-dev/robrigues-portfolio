@@ -15,7 +15,7 @@ interface HeaderSectionProps {
 const headerOptions = [
   { key: "inicio", offset: 128, id: "mainSection" },
   { key: "sobre", offset: 130, id: "aboutMeSection" },
-  { key: "resumo", offset: 0, id: "resumeSection" },
+  { key: "resumo", offset: 120, id: "resumeSection" },
   { key: "contato", offset: 0, id: "contactSection" }
 ];
 
