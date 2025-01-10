@@ -102,7 +102,7 @@ export default function FooterSection({ translations, selectedLanguage }: any) {
   };
 
   return (
-    <footer className="flex w-full h-full py-24 bg-[#0E0B20] justify-center max-md:px-[5vw]">
+    <footer id="contactSection" className="flex w-full h-full py-24 bg-[#0E0B20] justify-center max-md:px-[5vw]">
       <div className="flex w-full max-w-[1170px] justify-between md:items-end max-md:flex-col max-md:gap-12">
         <div className="flex flex-col gap-12">
           <div className="flex flex-col">
