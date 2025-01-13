@@ -23,7 +23,7 @@ export default {
   servicesTypeSection: {
     title: "Providing You with My Best Service",
     description:
-      "There are many variations of Lorem Ipsum passages available, but most have suffered some alteration, whether by the inclusion of humor or random words that don't look even slightly believable.",
+      "We offer customized web development services, focusing on performance, security, and usability, to help you achieve your goals.",
     services: [
       {
         title: "Blog Websites",
@@ -82,55 +82,56 @@ export default {
     }
   },
   notebookExperiences: {
-    title1: "Something will be here soon",
-    title2: "For now, just under construction",
+    title1: "Content Under Construction",
+    title2: "For now, developing big ideas",
     sections: [
       {
-        title: "Participation and Contribution in Educational Ecosystem",
+        title: "Independent Development of Sales Extension",
         description:
-          "Applying knowledge in NodeJs, ReactJs, and Angular to systems aimed at education."
+          "Creation of an extension that optimized processes and was indirectly responsible for generating tens of thousands of reais in a single month, efficiently integrating with external systems."
       },
       {
-        title: "Rebuilding Websites in Optimized Languages",
+        title: "Rebuilding Websites with Optimized Technologies",
         description:
-          "Using the NextJs framework, I have experience developing various NextJs sites faithful to the original design, aiming for performance and SEO."
+          "Expertise in using the Next.js framework, with experience in building websites highly faithful to the original design, focusing on advanced performance and top-notch SEO."
       },
       {
-        title: "Creating Systems Integrated with External Applications",
+        title: "Contribution to Systems with Over 100,000 Monthly Accesses",
         description:
-          "I create and manage applications with DOM injections in external apps, such as inserting a system into WhatsApp Web."
+          "Strategic participation in the development and maintenance of systems that record over 100,000 monthly accesses, ensuring scalability and stability."
       },
       {
-        title: "+5 thousand updates created on GitHub",
+        title: "Over 2 Years of Experience with Front-End Technologies",
         description:
-          "Each update, fix, and new feature implemented is a new learning experience."
+          "Proficiency in Next.js, used to build this portfolio, along with solid experience in React.js and Angular.js, creating modern and responsive interfaces."
       },
       {
-        title: "+100,000 monthly accesses on systems with my participation",
+        title: "Development of Large-Scale White Label Systems",
         description:
-          "With my cooperation, the systems I worked on can reach this high number of monthly accesses."
+          "Involvement in modular high-performance projects, handling millions of monthly requests in large-scale environments."
       },
       {
-        title: "+1.5 years of experience in Front-End languages",
+        title: "Creation of a Recognized National Library",
         description:
-          "Starting with NextJs (which this site was built with), I also have front-end experience in ReactJs and AngularJs."
+          "Development of the NPM library **br-national-services**, with over 15,000 downloads, widely used for validating and generating national data."
       },
       {
-        title: "Participation in White Label Scale Systems",
-        description: "Modular systems with millions of requests every month."
+        title: "Development of a Modularized WhatsApp Bot",
+        description:
+          "Construction of an advanced bot with over a year of operation, capable of generating texts, creating images, and replicating artists' voices using artificial intelligence and customized prompts."
       },
       {
-        title: "Creation of a National Library for DEVS",
+        title: "Development of an AI System with Animated Interface",
         description:
-          "Installed over 10,000 times, the NPM library 'br-national-services' is used for generating and validating national items."
+          "Creation of an interactive AI chat system, utilizing advanced animations and styling with TailwindCSS for an immersive and smooth experience."
       },
       {
-        title: "Modularized JS Construction of a WhatsApp BOT",
+        title: "Development of Restaurant Management Systems",
         description:
-          "At 9 months old, the BOT, using text prompts and AI, can generate text, build images, and replicate various artists' voices."
+          "Implementation of a complete system for restaurant management, including integration with order modules, dynamic menus, and real-time request tracking."
       }
     ]
-  },
+  },  
   mainSection: {
     subtitle: "FRONT-END DEVELOPER",
     title: "Gabriel Rodrigues",

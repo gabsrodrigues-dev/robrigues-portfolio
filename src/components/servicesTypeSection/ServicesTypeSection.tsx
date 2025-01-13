@@ -47,6 +47,7 @@ export default function ServicesTypeSection({ translations }: any) {
   return (
     <section
       ref={servicesRef}
+      id="resumeSection"
       className="flex flex-col p-12 rounded-3xl shadow-2xl gap-12 items-center bg-[#0E0B20] overflow-hidden group max-md:w-full max-md:px-[5vw]"
     >
       <div className="flex flex-col gap-3 text-center md:max-w-[70%]">

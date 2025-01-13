@@ -1,36 +1,7 @@
 import Image from "next/image";
 import StickyBox from "react-sticky-box";
 import { useState, useEffect } from "react";
-
-const experiences = [
-  [
-    { title: "Participação e contribuição em ecossistema de ensino", description: "Aplicação de conhecimento de NodeJs, ReactJs, e Angular em sistemas em prol da educação." },
-    { title: "Reconstrução de Websites em linguagens otimizadas", description: "Utilizando do framework NextJs, tenho experiência em desenvolver com fidelidade ao design original diversos sites em NextJs, visando performance e SEO." },
-    {
-      title: "Criação de sistemas integrados a aplicações externas",
-      description:
-        "Crio e gerencio aplicações com injeções DOM em aplicações externas, como a inserção de um sistema ao Whatsapp Web."
-    },
-  ],
-  [
-    {
-      title: "+5 mil atualizações criadas no GitHub",
-      description:
-        "Cada atualização, correção, e novidade programada é um aprendizado novo."
-      },
-      { title: "+100.000 acessos mensais nos sistemas com minha participação", description: "Contando com minha cooperação, os sistemas no qual tive a oportunidade conseguem alcançar este alto número mensal de acessos todos os meses." },
-      { title: "+1.5 anos de experiência nas linguagens Front-End", description: "Iniciando por NextJs, na qual este site foi desenvolvido, também tenho experiência front-end em ReactJs e AngularJs" }
-    ],
-    [
-      {
-        title: "Paticipação em Sistemas em escala White Label",
-        description:  
-          "Sistemas modulares, com milhões de requisições todos os meses."
-      },
-      { title: "Criação de biblioteca nacional para DEVS", description: "Instalado mais de 10 mil vezes, a biblioteca NPM br-national-services é utilizada para funções de geração e validação de itens nacionais." },
-      { title: "Contrução modularizada em JS de um BOT no Whatsapp", description: "Com 9 meses de idade, o BOT a partir de prompts de texto, utilizando I.A., é capaz de gerar texto, construir imagens, e replicar voz de diversos artistas." }
-    ],
-];
+import AbsoluteNotebookSpans from "../absoluteNotebookSpans/AbsoluteNotebookSpans";
 
 export default function NotebookExperiences({ translations }: any) {
   const [currentExperience, setCurrentExperience] = useState(0);
@@ -38,9 +9,11 @@ export default function NotebookExperiences({ translations }: any) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [animateStep, setAnimateStep] = useState(0);
 
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
   const sections = translations.notebookExperiences.sections;
   const chunkSize = 3;
-  const experiences = [];
+  const experiences: any[] = [];
   for (let i = 0; i < sections.length; i += chunkSize) {
     experiences.push(sections.slice(i, i + chunkSize));
   }
@@ -48,6 +21,7 @@ export default function NotebookExperiences({ translations }: any) {
   const handleScroll = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const stepHeight = window.innerHeight;
+
     const newExperience = Math.min(3, Math.floor(scrollTop / stepHeight));
     const calculatedExperience = newExperience <= 1 ? 0 : newExperience - 1;
 
@@ -58,20 +32,17 @@ export default function NotebookExperiences({ translations }: any) {
     }
 
     const percentage = ((scrollTop % stepHeight) / stepHeight) * 100;
+    setScrollPercentage(percentage); 
 
-    const resumeScrollVerifier = document.getElementById(
-      "resumeScrollVerifier"
-    );
+    const resumeScrollVerifier = document.getElementById("resumeScrollVerifier");
     if (resumeScrollVerifier) {
       const windowHeight = window.innerHeight;
       const resumeScrollTop = resumeScrollVerifier.getBoundingClientRect().top;
       const resumeScrollBottom =
         resumeScrollVerifier.getBoundingClientRect().bottom;
-      console.log(resumeScrollBottom);
+
       if (resumeScrollTop < 0 && resumeScrollBottom - windowHeight > 0) {
-        console.log(
-          `Porcentagem até o próximo step: ${percentage.toFixed(2)}%`
-        );
+        console.log(`Porcentagem até o próximo step: ${percentage.toFixed(2)}%`);
       }
     }
   };
@@ -111,15 +82,18 @@ export default function NotebookExperiences({ translations }: any) {
     <section
       id="resumeScrollVerifier"
       className="w-full relative"
-      style={{ height: "400vh" }}>
+      style={{ height: "400vh" }}
+    >
       <div className="absolute inset-0">
         <StickyBox
           offsetTop={0}
           offsetBottom={0}
-          className="h-screen flex justify-center">
+          className="h-screen flex justify-center"
+        >
           <div
             id="resumeSection"
-            className="flex items-center w-full max-w-[1170px] md:justify-between">
+            className="flex items-center w-full max-w-[1170px] md:justify-between"
+          >
             <div className="min-w-[700px] relative max-md:hidden">
               <div className="bg-gradient-to-r z-[100] -ml-[200px] w-[400px] h-full from-[#070514] via-[#070514] to-transparent absolute" />
               <Image
@@ -129,15 +103,12 @@ export default function NotebookExperiences({ translations }: any) {
                 height={500}
                 className="-ml-[100px]"
               />
-              <div className="absolute w-[533px] h-[330px] left-[-13px] top-[28px] select-none overflow-hidden">
-                <h1 className="text-3xl font-bold -mt-4 -ml-1 text-red-500">
-                  {translations.notebookExperiences.title1}
-                </h1>
-                <h1 className="text-3xl font-bold -mb-4 -mr-1 text-red-500 absolute bottom-0 right-0">
-                  {translations.notebookExperiences.title2}
-                </h1>
-              </div>
+              <AbsoluteNotebookSpans
+                translations={translations}
+                scrollPercentage={scrollPercentage}
+              />
             </div>
+
             <div className="flex flex-col h-full max-h-[500px] justify-between max-md:max-h-[380px]">
               {experiences[
                 animateStep !== 1 ? currentExperience : lastExperience
