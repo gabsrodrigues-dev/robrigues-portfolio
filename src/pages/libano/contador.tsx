@@ -104,8 +104,11 @@ export default function Home() {
 
       if (containerRef.current) {
         containerRef.current.style.transform = `scale(${
-          isHovered ? 1.2 : 1
+          isHovered ? 1.3 : 1
         }) translate(${currentX.current}px, ${currentY.current}px)`;
+        containerRef.current.style.filter = isHovered
+          ? "contrast(1.1) saturate(1.1) hue-rotate(5deg)"
+          : "none";
       }
 
       animationFrameId = requestAnimationFrame(animate);
@@ -122,9 +125,9 @@ export default function Home() {
     if (window.innerWidth >= 768 && containerRef.current) {
       setIsHovered(true);
       const rect = containerRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left; // X relativo ao contêiner
-      const mouseY = e.clientY - rect.top; // Y relativo ao contêiner
-      targetX.current = (mouseX - rect.width / 2) / 10; // Ajuste a sensibilidade
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top; 
+      targetX.current = (mouseX - rect.width / 2) / 10;
       targetY.current = (mouseY - rect.height / 2) / 10;
     }
   };
@@ -132,9 +135,9 @@ export default function Home() {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (isHovered && window.innerWidth >= 768 && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left; // X relativo ao contêiner
-      const mouseY = e.clientY - rect.top + 300; // Y relativo ao contêiner
-      targetX.current = (mouseX - rect.width / 2) / 10; // Ajuste a sensibilidade
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top + 400;
+      targetX.current = (mouseX - rect.width / 2) / 10;
       targetY.current = (mouseY - rect.height / 2) / 10;
     }
   };
@@ -151,7 +154,7 @@ export default function Home() {
 
   return (
     <div
-      className="flex flex-col min-h-screen bg-gray-50 transition-transform duration-300 ease-out overflow-x-hidden"
+      className="flex flex-col min-h-screen bg-gray-50 transition-all duration-300 ease-out overflow-x-hidden"
       ref={containerRef}>
       <style jsx global>{`
         * {
@@ -314,10 +317,26 @@ export default function Home() {
           animation-timing-function: linear;
           animation-iteration-count: infinite;
         }
+
+        .vignette::after {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          pointer-events: none;
+          z-index: 10;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0) 60%,
+            rgba(0, 0, 0, 0.2) 100%
+          );
+        }
       `}</style>
 
       <main className="flex-grow">
-        <section className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4">
+        <section className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4 vignette">
           <h1 className="text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
             NOSSOS ALUNOS
           </h1>
@@ -347,31 +366,30 @@ export default function Home() {
             className={`flex items-center justify-center ${
               pulse ? "animate-pulse" : ""
             }`}>
-                <div className="transition-all duration-[50ms] active:scale-[0.95]">
-            <div
-              className="bg-black bg-opacity-15 rounded-3xl rounded-tl-none rounded-br-none p-4 shadow-xl animate-float md:transform transition-transform duration-300 ease-out"
-              onMouseEnter={handleMouseEnter}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}>
-              <FlipNumbers
-                height={50}
-                width={48}
-                color="#fff"
-                play
-                perspective={1000}
-                numbers={formattedTotal}
-              /></div>
+            <div className="transition-all">
+              <div
+                className="bg-black bg-opacity-15 rounded-3xl rounded-tl-none rounded-br-none p-4 shadow-xl animate-float md:transform transition-transform duration-300 ease-out"
+                onMouseEnter={handleMouseEnter}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}>
+                <FlipNumbers
+                  height={50}
+                  width={48}
+                  color="#fff"
+                  play
+                  perspective={1000}
+                  numbers={formattedTotal}
+                />
+              </div>
             </div>
           </div>
           <h2 className="z-[2] text-lg font-extrabold mt-6 tracking-[6px] drop-shadow-lg animate-wave">
             <Typewriter
               words={typedTexts}
               loop={0}
-              cursor
-              cursorStyle="|"
               typeSpeed={100}
               deleteSpeed={40}
-              delaySpeed={10000}
+              delaySpeed={4000}
             />
           </h2>
         </section>
