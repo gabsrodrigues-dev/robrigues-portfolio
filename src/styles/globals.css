@@ -6,6 +6,14 @@ html {
   background: #070514;
 }
 
+body::-webkit-scrollbar {
+  width: 0px !important;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 @media not all and (min-width: 768px) {
   .max-md\:force-max-w-full {
       max-width: 100% !important;
