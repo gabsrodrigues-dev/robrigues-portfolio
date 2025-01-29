@@ -136,7 +136,7 @@ export default function Home() {
     if (isHovered && window.innerWidth >= 768 && containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top + 400;
+      const mouseY = e.clientY - rect.top + 500;
       targetX.current = (mouseX - rect.width / 2) / 10;
       targetY.current = (mouseY - rect.height / 2) / 10;
     }
@@ -384,6 +384,7 @@ export default function Home() {
             </div>
           </div>
           <h2 className="z-[2] text-lg font-extrabold mt-6 tracking-[6px] drop-shadow-lg animate-wave">
+            <span className="opacity-0">.</span>
             <Typewriter
               words={typedTexts}
               loop={0}
