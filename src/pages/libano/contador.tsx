@@ -21,10 +21,35 @@ export default function Home() {
   const [pulse, setPulse] = useState(false);
   const [fallingImages, setFallingImages] = useState<FallingImage[]>([]);
   const typedTexts = [
-    "VIDAS IMPACTADAS",
     "CARREIRAS TRANSFORMADAS",
     "ALUNOS REALIZADOS",
-    "SONHOS CONQUISTADOS"
+    "TRAJETÓRIAS ENRIQUECIDAS",
+    "POTENCIAIS DESBLOQUEADOS",
+    "OPORTUNIDADES AMPLIADAS",
+    "VIDAS IMPACTADAS",
+    "FUTUROS ELEVADOS",
+    "METAS ALCANÇADAS",
+    "HISTÓRIAS INSPIRADAS",
+    "CONQUISTAS CELEBRADAS",
+    "DESAFIOS SUPERADOS",
+    "MUDANÇAS REVOLUCIONADAS",
+    "OBJETIVOS CONCRETIZADOS",
+    "REALIZAÇÕES VALORIZADAS",
+    "SUCESSOS COMPARTILHADOS",
+    "PROJETOS CONSTRUÍDOS",
+    "TRANSFORMAÇÕES PROMOVIDAS",
+    "JORNADAS MOTIVADAS",
+    "ASPIRAÇÕES REALIZADAS",
+    "DESCOBERTAS ESTIMULADAS",
+    "TALENTOS APERFEIÇOADOS",
+    "AMBIÇÕES POTENCIALIZADAS",
+    "EXPERIÊNCIAS ENRIQUECIDAS",
+    "LEGADOS SOLIDIFICADOS",
+    "CONQUISTADORES RECONHECIDOS",
+    "VITÓRIAS CELEBRADAS",
+    "ESCOLHAS VALIDADAS",
+    "HABILIDADES DESENVOLVIDAS",
+    "FUTUROS CONSTRUÍDOS"
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,6 +58,7 @@ export default function Home() {
   const targetY = useRef<number>(0);
   const currentX = useRef<number>(0);
   const currentY = useRef<number>(0);
+  const contrastRef = useRef<HTMLDivElement>(null);
 
   // Função de interpolação linear (lerp)
   const lerp = (start: number, end: number, amt: number) => {
@@ -102,11 +128,11 @@ export default function Home() {
       currentX.current = lerp(currentX.current, targetX.current, 0.1);
       currentY.current = lerp(currentY.current, targetY.current, 0.1);
 
-      if (containerRef.current) {
+      if (containerRef.current && contrastRef.current) {
         containerRef.current.style.transform = `scale(${
           isHovered ? 1.3 : 1
         }) translate(${currentX.current}px, ${currentY.current}px)`;
-        containerRef.current.style.filter = isHovered
+        contrastRef.current.style.filter = isHovered
           ? "contrast(1.1) saturate(1.1) hue-rotate(5deg)"
           : "none";
       }
@@ -126,7 +152,7 @@ export default function Home() {
       setIsHovered(true);
       const rect = containerRef.current.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top; 
+      const mouseY = e.clientY - rect.top;
       targetX.current = (mouseX - rect.width / 2) / 10;
       targetY.current = (mouseY - rect.height / 2) / 10;
     }
@@ -336,7 +362,9 @@ export default function Home() {
       `}</style>
 
       <main className="flex-grow">
-        <section className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4 vignette">
+        <section
+          ref={contrastRef}
+          className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4 vignette">
           <h1 className="text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
             NOSSOS ALUNOS
           </h1>
