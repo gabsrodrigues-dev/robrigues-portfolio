@@ -370,7 +370,7 @@ export default function Home() {
             <section
               ref={contrastRef}
               className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4 transition-all duration-300 ease-out">
-              <h1 className="text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
+              <h1 className="z-[2] text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
                 NOSSOS ALUNOS
               </h1>
               <div className="absolute inset-0 overflow-hidden">
