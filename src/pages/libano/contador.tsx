@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import FlipNumbers from "react-flip-numbers";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
@@ -24,9 +24,21 @@ export default function Home() {
     "VIDAS IMPACTADAS",
     "CARREIRAS TRANSFORMADAS",
     "ALUNOS REALIZADOS",
-    "SONHOS CONQUISTADOS",
+    "SONHOS CONQUISTADOS"
   ];
-  
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const targetX = useRef<number>(0);
+  const targetY = useRef<number>(0);
+  const currentX = useRef<number>(0);
+  const currentY = useRef<number>(0);
+
+  // Função de interpolação linear (lerp)
+  const lerp = (start: number, end: number, amt: number) => {
+    return (1 - amt) * start + amt * end;
+  };
+
   useEffect(() => {
     const qty = Math.floor(Math.random() * 7) + 3;
     const tempImages: FallingImage[] = [];
@@ -56,7 +68,7 @@ export default function Home() {
         opacity: opacityVal < 0 ? 0 : opacityVal,
         duration,
         startAngle,
-        endAngle,
+        endAngle
       });
     }
     setFallingImages(tempImages);
@@ -83,10 +95,64 @@ export default function Home() {
     return () => clearInterval(intervalId);
   }, [total]);
 
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const animate = () => {
+      currentX.current = lerp(currentX.current, targetX.current, 0.1);
+      currentY.current = lerp(currentY.current, targetY.current, 0.1);
+
+      if (containerRef.current) {
+        containerRef.current.style.transform = `scale(${
+          isHovered ? 1.2 : 1
+        }) translate(${currentX.current}px, ${currentY.current}px)`;
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isHovered]);
+
+  const handleMouseEnter = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (window.innerWidth >= 768 && containerRef.current) {
+      setIsHovered(true);
+      const rect = containerRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left; // X relativo ao contêiner
+      const mouseY = e.clientY - rect.top; // Y relativo ao contêiner
+      targetX.current = (mouseX - rect.width / 2) / 10; // Ajuste a sensibilidade
+      targetY.current = (mouseY - rect.height / 2) / 10;
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (isHovered && window.innerWidth >= 768 && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left; // X relativo ao contêiner
+      const mouseY = e.clientY - rect.top + 300; // Y relativo ao contêiner
+      targetX.current = (mouseX - rect.width / 2) / 10; // Ajuste a sensibilidade
+      targetY.current = (mouseY - rect.height / 2) / 10;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (window.innerWidth >= 768 && containerRef.current) {
+      setIsHovered(false);
+      targetX.current = 0;
+      targetY.current = 0;
+    }
+  };
+
   const formattedTotal = String(total).padStart(6, "0");
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div
+      className="flex flex-col min-h-screen bg-gray-50 transition-transform duration-300 ease-out overflow-x-hidden"
+      ref={containerRef}>
       <style jsx global>{`
         * {
           user-select: none;
@@ -250,36 +316,6 @@ export default function Home() {
         }
       `}</style>
 
-      {/* <header className="w-full bg-white shadow-md animate-slideDown">
-        <div className="max-w-7xl w-full mx-auto px-4 py-4 flex items-center justify-between max-md:justify-center">
-          <div className="flex items-center space-x-2">
-            <div className="text-pink-600 text-2xl font-bold">
-              Contador de Alunos Líbano
-            </div>
-          </div>
-          <nav className="flex space-x-6 max-md:hidden">
-            <a
-              href="https://faculdadelibano.edu.br/"
-              className="hover:text-pink-500 text-gray-700 link-hover"
-            >
-              Líbano - Site de vendas
-            </a>
-            <a
-              href="https://portal.faculdadelibano.edu.br/"
-              className="hover:text-pink-500 text-gray-700 link-hover"
-            >
-              Líbano - Portal do Aluno
-            </a>
-            <a
-              href="/"
-              className="hover:text-pink-500 text-gray-700 link-hover"
-            >
-              O Desenvolvedor
-            </a>
-          </nav>
-        </div>
-      </header> */}
-
       <main className="flex-grow">
         <section className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4">
           <h1 className="text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
@@ -300,7 +336,7 @@ export default function Home() {
                     height: `${img.size}px`,
                     filter: `blur(${img.blur}px)`,
                     opacity: img.opacity,
-                    animationDuration: `${img.duration}s`,
+                    animationDuration: `${img.duration}s`
                   } as React.CSSProperties
                 }
                 className="falling-image"
@@ -310,9 +346,13 @@ export default function Home() {
           <div
             className={`flex items-center justify-center ${
               pulse ? "animate-pulse" : ""
-            }`}
-          >
-            <div className="bg-black bg-opacity-20 rounded-3xl p-4 shadow-lg animate-float">
+            }`}>
+                <div className="transition-all duration-[50ms] active:scale-[0.95]">
+            <div
+              className="bg-black bg-opacity-15 rounded-3xl rounded-tl-none rounded-br-none p-4 shadow-xl animate-float md:transform transition-transform duration-300 ease-out"
+              onMouseEnter={handleMouseEnter}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}>
               <FlipNumbers
                 height={50}
                 width={48}
@@ -320,15 +360,15 @@ export default function Home() {
                 play
                 perspective={1000}
                 numbers={formattedTotal}
-              />
+              /></div>
             </div>
           </div>
-           <h2 className="z-[2] text-lg font-extrabold mt-6 tracking-[6px] drop-shadow-lg animate-wave">
-            <span className="opacity-0">.</span>
+          <h2 className="z-[2] text-lg font-extrabold mt-6 tracking-[6px] drop-shadow-lg animate-wave">
             <Typewriter
               words={typedTexts}
               loop={0}
-              cursorBlinking
+              cursor
+              cursorStyle="|"
               typeSpeed={100}
               deleteSpeed={40}
               delaySpeed={10000}
@@ -348,26 +388,22 @@ export default function Home() {
             <div className="flex items-center justify-center space-x-6 text-white animate-socialGroup">
               <a
                 href="https://facebook.com"
-                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-blue-600 hover:bg-blue-700 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]"
-              >
+                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-blue-600 hover:bg-blue-700 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]">
                 <FaFacebookF className="text-xl" />
               </a>
               <a
                 href="https://x.com"
-                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-gray-800 hover:bg-gray-900 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]"
-              >
+                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-gray-800 hover:bg-gray-900 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]">
                 <FaXTwitter className="text-xl" />
               </a>
               <a
                 href="https://www.instagram.com"
-                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-pink-500 hover:bg-pink-600 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]"
-              >
+                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-pink-500 hover:bg-pink-600 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]">
                 <FaInstagram className="text-xl" />
               </a>
               <a
                 href="https://linkedin.com"
-                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-blue-700 hover:bg-blue-800 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]"
-              >
+                className="flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 bg-blue-700 hover:bg-blue-800 hover:-translate-y-[3px] hover:drop-shadow-2xl hover:scale-[1.02]">
                 <FaLinkedinIn className="text-xl" />
               </a>
             </div>
@@ -383,8 +419,7 @@ export default function Home() {
           <nav className="flex space-x-4 text-sm">
             <a
               href="https://faculdadelibano.edu.br/"
-              className="text-gray-500 hover:text-pink-500 link-hover"
-            >
+              className="text-gray-500 hover:text-pink-500 link-hover">
               Faculdade Líbano
             </a>
           </nav>
