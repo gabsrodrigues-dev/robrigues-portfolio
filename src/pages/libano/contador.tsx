@@ -22,7 +22,6 @@ export default function Home() {
   const [fallingImages, setFallingImages] = useState<FallingImage[]>([]);
   const typedTexts = [
     "CARREIRAS TRANSFORMADAS",
-    "ALUNOS REALIZADOS",
     "TRAJETÓRIAS ENRIQUECIDAS",
     "POTENCIAIS DESBLOQUEADOS",
     "OPORTUNIDADES AMPLIADAS",
