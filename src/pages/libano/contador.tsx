@@ -22,7 +22,6 @@ export default function Home() {
   const [fallingImages, setFallingImages] = useState<FallingImage[]>([]);
   const typedTexts = [
     "CARREIRAS TRANSFORMADAS",
-    "ALUNOS REALIZADOS",
     "TRAJETÓRIAS ENRIQUECIDAS",
     "POTENCIAIS DESBLOQUEADOS",
     "OPORTUNIDADES AMPLIADAS",
@@ -62,11 +61,13 @@ export default function Home() {
 
   // Função de interpolação linear (lerp)
   const lerp = (start: number, end: number, amt: number) => {
-    return (1 - amt) * start + amt * end;
+    const result = (1 - amt) * start + amt * end;
+    if (result < 0.01) return 0;
+    return Number(result.toFixed(3));
   };
 
   useEffect(() => {
-    const qty = Math.floor(Math.random() * 7) + 3;
+    const qty = Math.floor(Math.random() * 6) + 4;
     const tempImages: FallingImage[] = [];
     for (let i = 0; i < qty; i++) {
       let size = 0;
@@ -214,13 +215,13 @@ export default function Home() {
         }
         @keyframes float {
           0% {
-            transform: translateY(0px);
+            transform: translateY(5px);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
           }
           100% {
-            transform: translateY(0px);
+            transform: translateY(5px);
           }
         }
         @keyframes socialIn {
@@ -348,6 +349,7 @@ export default function Home() {
           content: "";
           position: fixed;
           top: 0;
+          height: 100vh;
           left: 0;
           right: 0;
           bottom: 0;
@@ -356,73 +358,76 @@ export default function Home() {
           background: radial-gradient(
             ellipse at center,
             rgba(0, 0, 0, 0) 60%,
-            rgba(0, 0, 0, 0.2) 100%
+            rgba(0, 0, 0, 0.3) 100%
           );
         }
       `}</style>
 
       <main className="flex-grow">
-        <section
-          ref={contrastRef}
-          className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4 vignette">
-          <h1 className="text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
-            NOSSOS ALUNOS
-          </h1>
-          <div className="absolute inset-0 overflow-hidden">
-            {fallingImages.map((img) => (
-              <img
-                key={img.id}
-                src="/images/libano/logo.webp"
-                alt="Falling"
-                style={
-                  {
-                    "--startAngle": img.startAngle,
-                    "--endAngle": img.endAngle,
-                    left: `${img.left}%`,
-                    width: `${img.size}px`,
-                    height: `${img.size}px`,
-                    filter: `blur(${img.blur}px)`,
-                    opacity: img.opacity,
-                    animationDuration: `${img.duration}s`
-                  } as React.CSSProperties
-                }
-                className="falling-image"
-              />
-            ))}
-          </div>
-          <div
-            className={`flex items-center justify-center ${
-              pulse ? "animate-pulse" : ""
-            }`}>
-            <div className="transition-all">
-              <div
-                className="bg-black bg-opacity-15 rounded-3xl rounded-tl-none rounded-br-none p-4 shadow-xl animate-float md:transform transition-transform duration-300 ease-out"
-                onMouseEnter={handleMouseEnter}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}>
-                <FlipNumbers
-                  height={50}
-                  width={48}
-                  color="#fff"
-                  play
-                  perspective={1000}
-                  numbers={formattedTotal}
-                />
+        <div className="">
+          <div className="vignette">
+            <section
+              ref={contrastRef}
+              className="relative w-full h-[100vh] flex flex-col items-center justify-center bg-animated-gradient text-white text-center px-4 transition-all duration-300 ease-out">
+              <h1 className="z-[2] text-4xl font-extrabold mb-6 tracking-[5px] drop-shadow-lg animate-wave">
+                NOSSOS ALUNOS
+              </h1>
+              <div className="absolute inset-0 overflow-hidden">
+                {fallingImages.map((img) => (
+                  <img
+                    key={img.id}
+                    src="/images/libano/logo.webp"
+                    alt="Falling"
+                    style={
+                      {
+                        "--startAngle": img.startAngle,
+                        "--endAngle": img.endAngle,
+                        left: `${img.left}%`,
+                        width: `${img.size}px`,
+                        height: `${img.size}px`,
+                        filter: `blur(${img.blur}px)`,
+                        opacity: img.opacity,
+                        animationDuration: `${img.duration}s`
+                      } as React.CSSProperties
+                    }
+                    className="falling-image"
+                  />
+                ))}
               </div>
-            </div>
+              <div
+                className={`flex items-center justify-center ${
+                  pulse ? "animate-pulse" : ""
+                }`}>
+                <div className="transition-all">
+                  <div
+                    className="bg-black bg-opacity-15 rounded-3xl rounded-tl-none rounded-br-none p-4 shadow-xl animate-float md:transform transition-transform duration-300 ease-out"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}>
+                    <FlipNumbers
+                      height={50}
+                      width={48}
+                      color="#fff"
+                      play
+                      perspective={1000}
+                      numbers={formattedTotal}
+                    />
+                  </div>
+                </div>
+              </div>
+              <h2 className="z-[2] text-lg font-extrabold mt-6 tracking-[6px] drop-shadow-lg animate-wave">
+                <span className="opacity-0">.</span>
+                <Typewriter
+                  words={typedTexts}
+                  loop={0}
+                  typeSpeed={100}
+                  deleteSpeed={40}
+                  delaySpeed={4000}
+                />
+              </h2>
+            </section>
           </div>
-          <h2 className="z-[2] text-lg font-extrabold mt-6 tracking-[6px] drop-shadow-lg animate-wave">
-            <span className="opacity-0">.</span>
-            <Typewriter
-              words={typedTexts}
-              loop={0}
-              typeSpeed={100}
-              deleteSpeed={40}
-              delaySpeed={4000}
-            />
-          </h2>
-        </section>
-
+        </div>
         <section className="py-12 bg-gray-100">
           <div className="max-w-7xl w-full mx-auto px-4 text-center">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4 animate-fadeIn">
